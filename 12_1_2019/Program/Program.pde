@@ -46,6 +46,7 @@ void draw() {
     pipe.reset();
     pipe.draw();
   }
+  
   bird.update();
   bird.display();
   bird.showscore();
