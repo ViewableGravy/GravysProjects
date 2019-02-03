@@ -1,0 +1,22 @@
+
+
+
+if (key == 'w') then
+move left one up
+
+if (key == 'up') then
+move right one up
+
+
+every time you click, that key is stored in the variable "key"
+if i click i, key = i; if i click k key = k
+
+key can only store one value at a time, so if two buttons are pressed, key is only one of them
+
+
+solution: 
+
+sandwich = 
+["dororo opening", "another opening", "sdsd"]
+
+sandwich[0] : "dororo opening"

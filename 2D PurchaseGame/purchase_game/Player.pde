@@ -1,13 +1,14 @@
 
 public class Player extends WorldObject {
 
+  public ArrayList<Entity> inventory = new ArrayList<Entity>(); //probably should change to private
+  public CurrencyPurse pocketMoney = new CurrencyPurse(0,0,600,20); 
+  
   Player(float x, float y) {
     super(x, y, 20, "player");
   }
   
-  public void display() {
-    
-  }
+  public void display() {}
   
   public void display(int angle) {
     pushMatrix();

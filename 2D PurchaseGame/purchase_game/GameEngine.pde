@@ -12,7 +12,7 @@ public class GameEngine {
   ArrayList<Entity> entities;
 
   public GameEngine(int wid, int hei) {
-    player = new Player(wid/3, hei/3);
+    player = new Player(wid/3, hei/2);
     entity = new Merchant(wid/2, hei/2, RAD, "entity 1");
     entity2 = new Merchant( wid/3, hei/3, RAD, "entity 2");
     entities = new ArrayList<Entity>();
@@ -29,7 +29,18 @@ public class GameEngine {
   }
 
   public void tick(float mousex, float mousey, char key) {
+    ///////////////////////////
+    // information displaying 
+    
     println(frameRate);
+    int hei = 100;
+    text("Copper: " + player.pocketMoney.copper + ", Silver: " + player.pocketMoney.silver + ", Peach: " + player.pocketMoney.peach , width/2, 50);
+    for (Entity obj : player.inventory) {
+      text(obj.name, width/2, hei);
+      hei += 15;
+    }
+    
+    ////////////
     if (currentInteractingEntity == null) {
       currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities, key, THREESIXTY, COLLIDEANGLE);
       Display(mousex, mousey);
@@ -37,10 +48,15 @@ public class GameEngine {
         player.move(key);
       }
     } else {
-      currentInteractingEntity.PrintInteraction();
-      if (key == ENTER) {
+      
+     boolean ShowInteractionInterface = currentInteractingEntity.ShowInteractionInterface(player);
+      
+      if (ShowInteractionInterface == false) {
         currentInteractingEntity = null;
       }
+
+
+      
     }
   }
 }
