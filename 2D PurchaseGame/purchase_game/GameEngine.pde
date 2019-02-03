@@ -5,126 +5,42 @@ public class GameEngine {
   final int COLLIDEANGLE = 30;
   final int THREESIXTY = 360;
   boolean display = true;
-  PVector playerpos, entpos;
+  Player player;
+  Merchant entity, entity2;
+  Entity currentInteractingEntity = null;
+
+  ArrayList<Entity> entities;
 
   public GameEngine(int wid, int hei) {
-    entpos = new PVector(wid/2, hei/2);
-    playerpos = new PVector(wid/3, hei/3);
+    player = new Player(wid/3, hei/3);
+    entity = new Merchant(wid/2, hei/2, RAD, "entity 1");
+    entity2 = new Merchant( wid/3, hei/3, RAD, "entity 2");
+    entities = new ArrayList<Entity>();
+    entities.add(entity);
+    entities.add(entity2);
     textAlign(CENTER);
   }
 
   public void Display(float mousex, float mousey) {
-    pushMatrix();
-
-    translate(playerpos.x, playerpos.y);
-    rotate(-radians(Direction(mousex, mousey)));
-
-    triangle(RAD - 10, -5, RAD - 3, 0, RAD - 10, 5);
-    popMatrix();
-
-    ellipse(playerpos.x, playerpos.y, RAD, RAD);
-    ellipse(entpos.x, entpos.y, RAD, RAD);
+    for ( Entity object : entities) {
+      object.display(object.GetDirection());
+    }
+    player.display(player.Direction(mousex,mousey));
   }
 
   public void tick(float mousex, float mousey, char key) {
-
-
-    if (DisplayMerchant(mousex,mousey,key)) {
-      MerchantMenu();
-      println("displaying menu");
-    } else {
+    println(frameRate);
+    if (currentInteractingEntity == null) {
+      currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities, key, THREESIXTY, COLLIDEANGLE);
       Display(mousex, mousey);
-    }
-
-    if (keyPressed) {
-      gameengine.move(key);
-    }
-  }
-  
-  void MerchantMenu() {
-    
-  }
-
-  public boolean DisplayMerchant(float mousex, float mousey, char key) {
-    if (!InteractDistanceEntity(Direction(mousex, mousey))) {
-      return false;
-    }
-    text("[e]", entpos.x + 1, entpos.y - 20);
-    if (!keyPressed) {
-      return false;
-    } 
-    if (!InteractEntity(key)) {
-      return false;
-    }
-    return true;
-  }
-  
-  public boolean InteractEntity(char key) {
-
-    if (key == 'e') {
-      return true;
-    }
-    return false;
-  }
-
-  public void move(char key) {
-
-    switch (key) {
-    case 'w':  
-      playerpos.y-= 1;
-      break;
-    case 's': 
-      playerpos.y+=1;
-      break;
-    case 'a' :
-      playerpos.x-=1;
-      break;
-    case 'd' : 
-      playerpos.x+=1;
-      break;
-    }
-  }
-
-  int Direction(float mousex, float mousey) {
-    PVector mousepos = new PVector(mousex, mousey);
-    PVector heading = mousepos.sub(playerpos);
-    int pointingCharAsDegree = round(map (atan2(heading.y, heading.x), PI, -PI, -180, 180)) ;
-    return pointingCharAsDegree;
-  }
-
-  boolean InteractDistanceEntity(int pointingCharAsDegree) {
-
-    PVector EntClone = entpos.copy();
-    PVector headingent = EntClone.sub(playerpos);
-    int pointingCharEntAsDegree = round(map(atan2(headingent.y, headingent.x), PI, -PI, -180, 180)) ; 
-
-    if (headingent.magSq() < sq(RAD)) 
-    {
-      //collision logic
-    } else if (headingent.magSq() < sq(40)) 
-    {
-      if (pointingCharEntAsDegree > 160) 
-      {
-        int tempdegrees = -THREESIXTY + pointingCharEntAsDegree + COLLIDEANGLE;
-        if ((pointingCharAsDegree > pointingCharEntAsDegree  - COLLIDEANGLE)  || pointingCharAsDegree < tempdegrees) 
-        {
-          return true;
-        }
-      } else if (pointingCharEntAsDegree < -160) 
-      {
-        int tempdegrees = THREESIXTY + pointingCharEntAsDegree - COLLIDEANGLE;
-        if ((pointingCharAsDegree < pointingCharEntAsDegree  + COLLIDEANGLE)  || pointingCharAsDegree > tempdegrees) 
-        {
-          return true;
-        }
-      } else 
-      {
-        if (pointingCharEntAsDegree > pointingCharAsDegree - COLLIDEANGLE && pointingCharEntAsDegree < pointingCharAsDegree + COLLIDEANGLE) 
-        {
-          return true;
-        }
+      if (keyPressed) {
+        player.move(key);
+      }
+    } else {
+      currentInteractingEntity.PrintInteraction();
+      if (key == ENTER) {
+        currentInteractingEntity = null;
       }
     }
-    return false;
   }
 }
