@@ -11,9 +11,7 @@ void setup() {
 void draw() {
   background(100);
 
-  gameengine.tick(mouseX, mouseY);
+  gameengine.tick(mouseX, mouseY, key);
 
-  if (keyPressed) {
-    gameengine.move(key);
-  }
+ 
 }
