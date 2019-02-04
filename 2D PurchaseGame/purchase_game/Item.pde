@@ -3,7 +3,9 @@ public class Item extends Entity {
   protected CurrencyPurse cost;
   protected int weight;
   protected String desc;
-  Item(Float _x, Float _y, int rad, String _name, CurrencyPurse _cost, int _weight, String _desc) {
+  public categoryEnum Misc;
+  
+  Item(Float _x, Float _y, int rad, String _name, CurrencyPurse _cost, int _weight, categoryEnum Misc, String _desc) {
     super(_x, _y, rad, _name); 
     cost = _cost;
     weight = _weight;

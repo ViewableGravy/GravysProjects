@@ -38,12 +38,17 @@ public class Merchant extends Entity {
             PreparePurchase = null;
           }
         }
+      } else {
+          fill(100, 0, 0);
+        text("you do not have enough money to purchase " + PreparePurchase.name, width/2, height/2 - 50);
+        fill(255);
       }
     }
 
 
 
     if (key == ENTER) {
+      PreparePurchase = null;
       return false;
     }
     return true; //assuming nothing purchased then return false
