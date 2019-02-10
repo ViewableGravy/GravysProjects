@@ -1,13 +1,13 @@
-public class GravyBanner extends Item implements MiscItem {
+public class GravyHelmet extends Item implements MiscItem {
 
   int x, y, wid, hei;
   boolean mousePreviousFrame = true;
-  public GravyBanner() {
-    super(0.0, 0.0, 5, "GravyBanner", new CurrencyPurse(0, 0, 300, 0), 0, categoryEnum.Misc, "A high level banner representing your commitment to the GravyBoat");
+  public GravyHelmet() {
+    super(0.0, 0.0, 5, "GravyHelmet", new CurrencyPurse(0, 0, 100, 0), 0, categoryEnum.Armour, "A high level Helmet representing your commitment to the GravyBoat");
   }
   
-   public GravyBanner(int _x, int _y, int _wid, int _hei) {
-    super(0.0, 0.0, 5, "GravyBanner", new CurrencyPurse(0, 0, 300, 0), 0, categoryEnum.Misc, "A high level banner representing your commitment to the GravyBoat");
+  public GravyHelmet(int _x, int _y, int _wid, int _hei) {
+    super(0.0, 0.0, 5, "GravyHelmet", new CurrencyPurse(0, 0, 100, 0), 0, categoryEnum.Armour, "A high level Helmet representing your commitment to the GravyBoat");
     x = _x;
     y = _y;
     wid = _wid;
@@ -19,7 +19,7 @@ public class GravyBanner extends Item implements MiscItem {
   }
 
   public Item CreateNewInstance() {
-    return new GravyBanner();
+    return new GravyHelmet();
   }
 
   public void DisplayButton() {

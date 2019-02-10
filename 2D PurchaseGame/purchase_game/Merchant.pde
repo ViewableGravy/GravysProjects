@@ -4,7 +4,6 @@ public class Merchant extends Entity {
   Item PreparePurchase = null;
   MerchantInterface Interface ;
   boolean keyprevframe = false;
-  
 
   //----------------------------------------------------------------------------------
   Merchant(float _x, float _y, int rad, String _name, int wid, int hei) {
@@ -41,6 +40,9 @@ public class Merchant extends Entity {
         if (Interface.keypress()) {
           PreparePurchase = null;
           return false;
+        } else {
+          Interface.UpdateShoppingCart();
+          Interface.ShowShoppingList();
         }
       }
     }

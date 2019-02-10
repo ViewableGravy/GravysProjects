@@ -8,9 +8,7 @@ class ArmourButton extends CategoryButton {
       { 
         // add each Armour item to this arraylist which is passed up to parent classes
         add(new GravyArmour());
-        add(new GravyArmour());
-        add(new GravyArmour());
-        add(new GravyArmour());
+        add(new GravyHelmet());
       }
     }
     , x, y, wid, hei));

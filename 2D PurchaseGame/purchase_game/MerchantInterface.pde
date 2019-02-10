@@ -2,7 +2,8 @@
 public class MerchantInterface {
   ArrayList<CategoryButton> categories = new ArrayList<CategoryButton>(); 
   private int x, y, wid, hei;
-  
+  private ArrayList<Item> allItems = new ArrayList<Item>();
+
   MerchantInterface(int _x, int _y, int _wid, int _hei) {
     x = _x;
     y = _y;
@@ -10,7 +11,7 @@ public class MerchantInterface {
     hei = _hei;
     final int tall = 80;
     final int edge = _wid/50;
-    
+
     int tempy = _y + _hei/3;
     int increment = tall + 10;
     categories.add(new ArmourButton(_x + edge, tempy, _wid/3, tall));
@@ -30,6 +31,17 @@ public class MerchantInterface {
     rect(x, y, wid, hei);
   }
 
+  public void UpdateShoppingCart() {
+    for ( CategoryButton button : categories) {
+      // add each item from the category into a universal array
+      for (Item itm : button.shoppingCart) {
+        allItems.add(itm);
+      }
+      //Reset the arraylist once the items have been taken from it
+      button.shoppingCart = new ArrayList<Item>();
+    }
+  }
+
   boolean keypress() {
     for (CategoryButton button : categories) {
       if (button.OpenMenu) {
@@ -41,6 +53,10 @@ public class MerchantInterface {
     return true;
   }
   
+  void ShowShoppingList() {
+   println(allItems); 
+  }
+
   void mousePress(boolean mouseReleased) {
     for (CategoryButton button : categories) {
       button.mouseReleased = mouseReleased;

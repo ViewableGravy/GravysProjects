@@ -19,6 +19,7 @@ public class CategoryButton {
     //note, this will take permameters such as category picture and other display details from inherited classes
   }
 
+  // for displaying the interface of the merchant. This includes the category buttons, confirm purchase button and other visual interface
   public void display() {
     final int IMG = hei - 20;
     fill(100, 0, 0);
@@ -28,13 +29,14 @@ public class CategoryButton {
     textSize(64);
     //
     text(category.name(), x + IMG + 60, y + 2*hei/3 + hei/6); //category name
-    rect(x +10, y + 10, IMG, IMG); //represents Category image
+    rect(x +10, y + 10, IMG, IMG);                            //represents Category image
     //
     textSize(12);
     textAlign(CENTER);
     fill(255);
   }
 
+  // Runs per frame and decides whether to display the category buttons or their Item buttons
   int firstclick = 0;
   public void DisplayCategory(float mousex, float mousey) {
     if (Clicked(mousex, mousey)) {
@@ -48,6 +50,7 @@ public class CategoryButton {
   }
 
 
+  // has the ability to both display item buttons for category and store items in the shopping cart
   public void ItemMenu(float mousex, float mousey) {
     itemcategory.mouseReleased = mouseReleased;
     itemcategory.display();
@@ -60,10 +63,8 @@ public class CategoryButton {
       if (item != null) {
         shoppingCart.add(item);
         item = null;
-        println(shoppingCart);
       }
     }
-    
   }
 
   //check if the user has clicked on the category button
