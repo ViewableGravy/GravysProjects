@@ -4,6 +4,7 @@ public abstract class Item extends Entity {
   protected int weight;
   protected String desc;
   public categoryEnum category;
+  public boolean mousePreviousFrame = false;
 
   Item(Float _x, Float _y, int rad, String _name, CurrencyPurse _cost, int _weight, categoryEnum _category, String _desc) {
     super(_x, _y, rad, _name); 
@@ -25,9 +26,11 @@ public abstract class Item extends Entity {
     /*this is not implemented yet for this object */
   };
 
+  public abstract boolean Clicked(float mousex, float mousey);
   public abstract Item CreateNewInstance();
   public abstract categoryEnum GetCategory();
-  public abstract void DisplayButton(int x, int y, int wid, int hei);
+  public abstract void DisplayButton();
+  public abstract void SetButton(int _x, int _y, int _wid, int _hei);
 
   public  void display(int angle) {/*this is not implemented yet for this object */
   };

@@ -4,7 +4,10 @@ public class CategoryButton {
   categoryEnum category;
   boolean OpenMenu = false;
   int x, y, wid, hei;
-  CategoryItems itemcategory;
+  public CategoryItems itemcategory;
+  private ArrayList<Item> shoppingCart = new ArrayList<Item>();
+  boolean mouseReleased = false;
+  
 
   public CategoryButton(categoryEnum _category, int _x, int _y, int _wid, int _hei, CategoryItems cat) {
     x = _x;
@@ -32,33 +35,42 @@ public class CategoryButton {
     fill(255);
   }
 
+  int firstclick = 0;
   public void DisplayCategory(float mousex, float mousey) {
     if (Clicked(mousex, mousey)) {
-      ItemMenu();
+      if (firstclick == 0) {
+        firstclick = 1;
+      }
+      ItemMenu(mousex, mousey);
     } else {
       display();
     }
   }
 
-  public void ItemMenu() {
+
+  public void ItemMenu(float mousex, float mousey) {
+    itemcategory.mouseReleased = mouseReleased;
     itemcategory.display();
+    if (firstclick == 1) {
+      if (mouseReleased) {
+        firstclick = 2;
+      }
+    } else {
+      Item item = itemcategory.Clicked(mousex, mousey);
+      if (item != null) {
+        shoppingCart.add(item);
+        item = null;
+        println(shoppingCart);
+      }
+    }
+    
   }
 
+  //check if the user has clicked on the category button
   public boolean Clicked(float mousex, float mousey) {
-    if (!OpenMenu) {
-      if (mousex > x && mousex < x+wid && mousey > y && mousey < y + hei) { 
-        if (mousePressed) {
-          return OpenMenu = true;
-        } else {
-          //hover variable
-          return OpenMenu = false;
-        }
-      } else {
-        return OpenMenu = false;
-      }
+    if (OpenMenu || (mousex > x && mousex < x+wid && mousey > y && mousey < y + hei && mousePressed)) { 
+      return OpenMenu = true;
     } 
-    return true;
+    return OpenMenu = false;
   }
-  
-  
 }

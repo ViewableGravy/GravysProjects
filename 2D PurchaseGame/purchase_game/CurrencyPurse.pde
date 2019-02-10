@@ -10,7 +10,7 @@ class CurrencyPurse {
     
     for(int i = 0; i < users.size(); i++) {
       JSONObject user = users.getJSONObject(i);
-      if (user.get("username").equals(username)) {
+      if (user.get("username").equals(username.toLowerCase())) {
         temp = user.get("points").toString(); 
       }
     }

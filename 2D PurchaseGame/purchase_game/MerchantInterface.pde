@@ -2,6 +2,7 @@
 public class MerchantInterface {
   ArrayList<CategoryButton> categories = new ArrayList<CategoryButton>(); 
   private int x, y, wid, hei;
+  
   MerchantInterface(int _x, int _y, int _wid, int _hei) {
     x = _x;
     y = _y;
@@ -9,9 +10,20 @@ public class MerchantInterface {
     hei = _hei;
     final int tall = 80;
     final int edge = _wid/50;
-    categories.add(new ArmourButton(_x + edge, _y + _hei/3, _wid/3, tall));
-    _y += tall + 10;
-    categories.add(new MiscButton(_x + edge, _y + _hei/3, _wid/3, tall));
+    
+    int tempy = _y + _hei/3;
+    int increment = tall + 10;
+    categories.add(new ArmourButton(_x + edge, tempy, _wid/3, tall));
+    tempy += increment;
+    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, increment));
+    tempy += increment;
+    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 2*increment));
+    tempy += increment;
+    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 3*increment));
+    tempy += increment;
+    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 4*increment));
+    tempy += increment;
+    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 5*increment));
   }
 
   void DisplayOutline() {
@@ -22,10 +34,17 @@ public class MerchantInterface {
     for (CategoryButton button : categories) {
       if (button.OpenMenu) {
         button.OpenMenu = false;
+        button.firstclick = 0;
         return false;
       }
     }
     return true;
+  }
+  
+  void mousePress(boolean mouseReleased) {
+    for (CategoryButton button : categories) {
+      button.mouseReleased = mouseReleased;
+    }
   }
 
   void displayCategories(float mousex, float mousey) {

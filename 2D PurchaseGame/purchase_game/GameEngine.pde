@@ -9,9 +9,10 @@ public class GameEngine {
   Merchant entity, entity2;
   Entity currentInteractingEntity = null;
   boolean keyReleased = true;
-
+  boolean mouseReleased = true;
   ArrayList<Entity> entities;
 
+  // declare all entities in the game engine (the setup of the world)
   public GameEngine(int wid, int hei) {
     player = new Player(wid/3, hei/2);
     entity = new Merchant(wid/2, hei/2, RAD, "entity 1", wid,hei);
@@ -22,13 +23,19 @@ public class GameEngine {
     textAlign(CENTER);
   }
 
+  // in charge of displaying all world entities
   public void Display(float mousex, float mousey) {
+    //display entities other than player
     for ( Entity object : entities) {
       object.display(object.GetDirection());
     }
+    
+    
+    //display the player
     player.display(player.Direction(mousex,mousey));
   }
 
+  // what does the game need to do every frame? Ideally this is not linked to the frameRate but for now it is.
   public void tick(float mousex, float mousey, char key) {
     ///////////////////////////
     // information displaying //
@@ -43,20 +50,28 @@ public class GameEngine {
     
     ////////////
     
-    
+    // if the player is not interacting with an entity then show environment
     if (currentInteractingEntity == null) {
       currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities, key, THREESIXTY, COLLIDEANGLE); //determine if player is interacting with entity
       Display(mousex, mousey); //Display all entities
       if (keyPressed) {
         player.move(key);
       }
-    } else {
-     //if the user clicks "enter" and this is therefore false then the interacting entity is removed and the game checks for interaction
+    } 
+    // if the player is interacting with an entity then display the entities interaction interface
+    else 
+    {
+     // tell the interacting entity whether or not a key has been released
      currentInteractingEntity.keyReleased = keyReleased;
+     currentInteractingEntity.mouseReleased = mouseReleased;
+     // run the InteractionInterface (this should return an object with purchased items 
      boolean ShowInteractionInterface = currentInteractingEntity.ShowInteractionInterface(player, mousex,mousey);
-      if (ShowInteractionInterface == false) {
+      if (!ShowInteractionInterface) {
         currentInteractingEntity = null;
       }
     }
   }
+  
+  
+  
 }

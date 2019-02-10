@@ -7,7 +7,7 @@ public class Player extends WorldObject {
   public CurrencyPurse pocketMoney = new CurrencyPurse(name); 
   
   Player(float x, float y) {
-    super(x, y, 20, "fuzedpeach");
+    super(x, y, 20, "Fuzedpeach");
   }
   
   public void display() {}
@@ -65,7 +65,7 @@ public class Player extends WorldObject {
   
 
   public void move(char key) {
-
+    //not finished movement
     switch (key) {
     case 'w':  
       pos.y-= 2;

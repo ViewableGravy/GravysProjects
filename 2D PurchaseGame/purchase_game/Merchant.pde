@@ -4,28 +4,34 @@ public class Merchant extends Entity {
   Item PreparePurchase = null;
   MerchantInterface Interface ;
   boolean keyprevframe = false;
+  
 
+  //----------------------------------------------------------------------------------
   Merchant(float _x, float _y, int rad, String _name, int wid, int hei) {
     super(_x, _y, rad, _name);
     Interface = new MerchantInterface( wid/5, 0, 3*wid/5, hei);
   }
 
-
+  //----------------------------------------------------------------------------------
   void display(int angle) {
     // implement movement at later date (no need to use angle for now)
-
     text("Merchant", pos.x + 1, pos.y - 20);
     ellipse(pos.x, pos.y, RAD, RAD);
   }
 
+
+  //----------------------------------------------------------------------------------
   public int GetDirection() {
     // currently does not move, so no direction necessary
     return 0;
   }
 
   boolean ready = true;
-
   public boolean ShowInteractionInterface(Player player, float mousex, float mousey) {
+    
+    Interface.mousePress(mouseReleased);
+      
+    
     Interface.DisplayOutline();
     Interface.displayCategories(mousex, mousey);
     if (keyPressed && ready) {
@@ -68,21 +74,16 @@ public class Merchant extends Entity {
      */
   }
 
+  // check if the Player has chosen to interact with the entity by using the 'e' key
   Entity interact(char key) {
     text("[e]", pos.x + 1, pos.y - 35);
     if (!keyPressed) {
-      return null;
+      if (key == 'e') {
+        return this;
+      }
     } 
-    if (!InteractEntity(key)) {
-      return null;
-    }
-    return this;
+    return null;
   }
-
-  boolean InteractEntity(char key) {
-    if (key == 'e') {
-      return true;
-    }
-    return false;
-  }
+  
+  
 }

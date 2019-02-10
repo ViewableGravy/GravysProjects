@@ -24,3 +24,11 @@ void keyReleased() {
 void keyPressed() {
  gameengine.keyReleased = false; 
 }
+
+void mouseReleased() {
+ gameengine.mouseReleased = true;
+}
+
+void mousePressed() {
+ gameengine.mouseReleased = false; 
+}
