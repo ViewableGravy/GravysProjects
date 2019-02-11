@@ -3,6 +3,7 @@ public class MerchantInterface {
   ArrayList<CategoryButton> categories = new ArrayList<CategoryButton>(); 
   private int x, y, wid, hei;
   private ArrayList<Item> allItems = new ArrayList<Item>();
+  private PImage background = loadImage("TempMerchantInterface.png");
 
   MerchantInterface(int _x, int _y, int _wid, int _hei) {
     x = _x;
@@ -13,7 +14,8 @@ public class MerchantInterface {
     final int edge = _wid/50;
 
     int tempy = _y + _hei/3;
-    int increment = tall + 10;
+   // int increment = tall + 10;
+   int increment = tall + 70;
     categories.add(new ArmourButton(_x + edge, tempy, _wid/3, tall));
     tempy += increment;
     categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, increment));
@@ -28,7 +30,8 @@ public class MerchantInterface {
   }
 
   void DisplayOutline() {
-    rect(x, y, wid, hei);
+    //rect(x, y, wid, hei);
+    image(background,0,0);
   }
 
   public void UpdateShoppingCart() {

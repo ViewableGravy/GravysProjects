@@ -7,7 +7,7 @@ public class CategoryButton {
   public CategoryItems itemcategory;
   private ArrayList<Item> shoppingCart = new ArrayList<Item>();
   boolean mouseReleased = false;
-  
+
 
   public CategoryButton(categoryEnum _category, int _x, int _y, int _wid, int _hei, CategoryItems cat) {
     x = _x;
@@ -21,14 +21,15 @@ public class CategoryButton {
 
   // for displaying the interface of the merchant. This includes the category buttons, confirm purchase button and other visual interface
   public void display() {
+
     final int IMG = hei - 20;
     fill(100, 0, 0);
     rect(x, y, wid, hei);
     fill(0, 100, 0);
-    textAlign(LEFT);
-    textSize(64);
+    textAlign(RIGHT);
+    textSize(32);
     //
-    text(category.name(), x + IMG + 60, y + 2*hei/3 + hei/6); //category name
+    text(category.name(), x + wid - 20, y + 2*hei/3 + hei/6); //category name
     rect(x +10, y + 10, IMG, IMG);                            //represents Category image
     //
     textSize(12);
@@ -40,9 +41,7 @@ public class CategoryButton {
   int firstclick = 0;
   public void DisplayCategory(float mousex, float mousey) {
     if (Clicked(mousex, mousey)) {
-      if (firstclick == 0) {
-        firstclick = 1;
-      }
+      
       ItemMenu(mousex, mousey);
     } else {
       display();
@@ -54,6 +53,9 @@ public class CategoryButton {
   public void ItemMenu(float mousex, float mousey) {
     itemcategory.mouseReleased = mouseReleased;
     itemcategory.display();
+    if (firstclick == 0) {
+        firstclick = 1;
+      }
     if (firstclick == 1) {
       if (mouseReleased) {
         firstclick = 2;

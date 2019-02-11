@@ -23,7 +23,7 @@ public class CategoryItems {
   public void display() {
 
     for (Item itm : items) {
-      itm.DisplayButton();
+      itm.DisplayButton("merchant");
     }
   }
 
@@ -34,24 +34,40 @@ public class CategoryItems {
   }
 
   int firstclick = 0;
+  int test = 0;
   public Item Clicked(float mousex, float mousey) {
-    for (Item itm : items) {
-      itm.mousePreviousFrame = !mouseReleased;
-      if (firstclick == 0) {
-        firstclick = 1;
-      }
-      if (firstclick == 1) {
-        if (mouseReleased) {
-          firstclick = 2;
-        }
-      } else if (firstclick == 2) {
-        if (itm.Clicked(mousex, mousey)) {
-          firstclick = 0;
-          return itm.CreateNewInstance();
-        }
-      }
+    // ------- if not first click
+    if (firstclick == 0) {
+      firstclick = 1;
     }
-
+    if (firstclick == 1) {
+      if (mouseReleased) {
+        firstclick = 2;
+      }
+    } else if (firstclick == 2) {
+      // ------- then check if a item is clicked
+      for (Item itm : items) {
+        itm.mousePreviousFrame = !mouseReleased; // previous frame was clicked if it wasn't released fam
+        
+        
+        if (itm.Clicked(mousex, mousey)) {
+          println(itm.name);
+          String confirm = itm.Confirm(mousex, mousey);
+          if (confirm == "show") {
+            itm.ShowConfirmPurchase();
+          } else if (confirm == "cancel") {
+            firstclick = 0;
+            itm.clicked = false;
+          } else if (confirm == "confirm") {
+            firstclick = 0;
+            itm.clicked = false;
+            return itm.CreateNewInstance();
+          }
+        }
+      }
+      // -------
+    }
+    test = 0;
     return null;
   }
 }

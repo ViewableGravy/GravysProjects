@@ -1,11 +1,13 @@
 
 
-
+PFont fairyDust;
 GameEngine gameengine;
 
 void setup() {
   fullScreen();
  // size(600, 600);
+ fairyDust = createFont("FairyDustB.ttf", 12);
+ textFont(fairyDust);
   gameengine =  new GameEngine(width, height);
 }
 

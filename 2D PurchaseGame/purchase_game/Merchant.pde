@@ -8,7 +8,8 @@ public class Merchant extends Entity {
   //----------------------------------------------------------------------------------
   Merchant(float _x, float _y, int rad, String _name, int wid, int hei) {
     super(_x, _y, rad, _name);
-    Interface = new MerchantInterface( wid/5, 0, 3*wid/5, hei);
+    //Interface = new MerchantInterface( wid/5, 0, 3*wid/5, hei);
+    Interface = new MerchantInterface( wid/5 + 40, 0, 3*wid/5, hei);
   }
 
   //----------------------------------------------------------------------------------
@@ -27,10 +28,10 @@ public class Merchant extends Entity {
 
   boolean ready = true;
   public boolean ShowInteractionInterface(Player player, float mousex, float mousey) {
-    
+
     Interface.mousePress(mouseReleased);
-      
-    
+
+
     Interface.DisplayOutline();
     Interface.displayCategories(mousex, mousey);
     if (keyPressed && ready) {
@@ -39,6 +40,10 @@ public class Merchant extends Entity {
       if (key == ENTER) {
         if (Interface.keypress()) {
           PreparePurchase = null;
+          for (Item itm : Interface.allItems) {
+            player.inventory.add(itm);
+          }
+          Interface.allItems = new ArrayList<Item>();
           return false;
         } else {
           Interface.UpdateShoppingCart();
@@ -86,6 +91,4 @@ public class Merchant extends Entity {
     } 
     return null;
   }
-  
-  
 }
