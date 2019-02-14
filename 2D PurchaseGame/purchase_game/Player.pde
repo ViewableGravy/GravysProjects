@@ -2,16 +2,17 @@
 public class Player extends WorldObject {
 
   public ArrayList<Entity> inventory = new ArrayList<Entity>(); //probably should change to private
-  
+
   // for now i will just make this me but future should be able to create your character with personal details
   public CurrencyPurse pocketMoney = new CurrencyPurse(name); 
-  
+
   Player(float x, float y) {
     super(x, y, 20, "Fuzedpeach");
   }
-  
-  public void display() {}
-  
+
+  public void display() {
+  }
+
   public void display(int angle) {
     pushMatrix();
 
@@ -26,10 +27,14 @@ public class Player extends WorldObject {
   }
 
   public int Direction(float mousex, float mousey) {
-    PVector mousepos = new PVector(mousex, mousey);
-    PVector heading = mousepos.sub(pos);
+    PVector heading = Heading(mousex, mousey);
     int pointingCharAsDegree = round(map (atan2(heading.y, heading.x), PI, -PI, -180, 180)) ;
     return pointingCharAsDegree;
+  }
+
+  public PVector Heading(float mousex, float mousey) {
+    PVector mousepos = new PVector(mousex, mousey);
+    return mousepos.sub(pos);
   }
 
   Entity InteractDistanceEntity(int pointingCharAsDegree, ArrayList<Entity> entities, char key, int THREESIXTY, int COLLIDEANGLE) {
@@ -61,24 +66,36 @@ public class Player extends WorldObject {
     }
     return null;
   }
-  
-  
 
-  public void move(char key) {
-    //not finished movement
-    switch (key) {
-    case 'w':  
-      pos.y-= 2;
-      break;
-    case 's': 
-      pos.y+=2;
-      break;
-    case 'a' :
-      pos.x-=2;
-      break;
-    case 'd' : 
-      pos.x+=2;
-      break;
+  public Entity ThrowSelectedItem(float mousex, float mousey) {
+    Throwable temp = null;
+    for (Entity itm : inventory) {
+      if (itm instanceof Throwable) {
+        temp = (Throwable)itm;
+        inventory.remove(itm);
+        temp.SetDirection(Heading(mousex,mousey));
+        temp.SetToPlayerLocation(pos.x,pos.y);
+        break;
+      }
     }
+    return (Entity)temp;
   }
+
+public void move(char key) {
+  //not finished movement
+  switch (key) {
+  case 'w':  
+    pos.y-= 2;
+    break;
+  case 's': 
+    pos.y+=2;
+    break;
+  case 'a' :
+    pos.x-=2;
+    break;
+  case 'd' : 
+    pos.x+=2;
+    break;
+  }
+}
 }

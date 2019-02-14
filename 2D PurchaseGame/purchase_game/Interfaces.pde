@@ -5,3 +5,7 @@ interface MiscItem {
 interface ArmourItem {
   public categoryEnum category = categoryEnum.Armour;
 }
+
+//interface WeaponItem {
+//  public categoryEnum category = categoryEnum.Weapons;
+//}

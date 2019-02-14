@@ -14,6 +14,14 @@ public abstract class Item extends Entity {
     desc = _desc;
     category = _category;
   }
+  
+  Item(String _name, CurrencyPurse _cost, categoryEnum _category, String _desc) {
+    super(0.0, 0.0, 5, _name); 
+    cost = _cost;
+    weight = 5;
+    desc = _desc;
+    category = _category;
+  }
 
   public Entity interact(char key) {
     return null; /*this is not implemented yet for this object */
@@ -95,6 +103,6 @@ public abstract class Item extends Entity {
     return "show";
   }
 
-  public  void display(int angle) {/*this is not implemented yet for this object */
+  public  void display(int angle) { //
   };
 }

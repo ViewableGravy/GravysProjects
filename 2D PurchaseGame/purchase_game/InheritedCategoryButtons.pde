@@ -29,3 +29,18 @@ class MiscButton extends CategoryButton {
 
   //ArrayList<Item> _items, int _x, int _y, int _wid, int _hei
 }
+
+class WeaponButton extends CategoryButton {
+
+  WeaponButton(int x, int y, int wid, int hei, int yminus) {
+    super(categoryEnum.Weapons, x, y, wid, hei, new CategoryItems(new ArrayList<Item>() {
+      { 
+        // add each Misc item to this arraylist which is passed up to parent classes
+        add(new Boomerang()); 
+      }
+    }
+    , x, y - yminus, wid, hei));
+  }
+
+  //ArrayList<Item> _items, int _x, int _y, int _wid, int _hei
+}

@@ -1,11 +1,11 @@
-public class GravyArmour extends Item implements ArmourItem {
+public class GravyArmour extends WearableItem implements ArmourItem {
 
   public GravyArmour() {
-    super(0.0, 0.0, 5, "GravyArmour", new CurrencyPurse(0, 0, 300, 0), 0, categoryEnum.Armour, "A high level set of armour representing your commitment to the GravyBoat");
+    super("GravyArmour", new CurrencyPurse(0, 0, 300, 0), categoryEnum.Armour, bodyPart.Chest, "A high level set of armour representing your commitment to the GravyBoat");
   }
   
   public GravyArmour(float _x, float _y, int _wid, int _hei) {
-    super(_x, _y, 5, "GravyArmour", new CurrencyPurse(0, 0, 300, 0), 0, categoryEnum.Armour, "A high level set of armour representing your commitment to the GravyBoat");
+    super(_x, _y, "GravyArmour", new CurrencyPurse(0, 0, 300, 0), 0, categoryEnum.Armour, bodyPart.Chest, "A high level set of armour representing your commitment to the GravyBoat");
     wid = _wid;
     hei = _hei;
   }
@@ -14,7 +14,7 @@ public class GravyArmour extends Item implements ArmourItem {
     return ArmourItem.category;
   }
 
-  public Item CreateNewInstance() {
+  public WearableItem CreateNewInstance() {
     return new GravyArmour();
   }
 }

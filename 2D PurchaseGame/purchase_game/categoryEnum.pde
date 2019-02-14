@@ -11,3 +11,14 @@ enum categoryEnum {
   Slaves
   
 }
+
+enum bodyPart {
+ 
+  Chest,
+  Legs,
+  Gloves,
+  Boots,
+  Helmet,
+  Finger
+  
+}

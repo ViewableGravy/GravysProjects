@@ -20,7 +20,7 @@ public class MerchantInterface {
     tempy += increment;
     categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, increment));
     tempy += increment;
-    categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 2*increment));
+    categories.add(new WeaponButton(_x + edge, tempy, _wid/3, tall, 2*increment));
     tempy += increment;
     categories.add(new MiscButton(_x + edge, tempy, _wid/3, tall, 3*increment));
     tempy += increment;
