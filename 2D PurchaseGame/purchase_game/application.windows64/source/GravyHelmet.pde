@@ -18,8 +18,4 @@ public class GravyHelmet extends WearableItem implements MiscItem {
   public WearableItem CreateNewInstance() {
     return new GravyHelmet();
   }
-  
-   public void WorldFunctionality(GameEngine world) {
-    // nothing yet;
-  };
 }

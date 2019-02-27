@@ -9,8 +9,8 @@ public interface Throwable {
   // sets the velocity direction of the object
   public abstract void SetDirection(PVector playerDirection);
   // adds it's velocity to position
-  public abstract void ThrowingMechanics(GameEngine world);
+  public abstract void ThrowingMechanics();
   // shows the object in the world
-  //public abstract void display();
+  public abstract void display();
   
 }

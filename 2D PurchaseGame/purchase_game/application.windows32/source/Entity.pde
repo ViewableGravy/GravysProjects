@@ -9,6 +9,6 @@ public abstract class Entity extends WorldObject {
   public abstract Entity interact(char key);
   public abstract int GetDirection();
   public abstract boolean ShowInteractionInterface(Player player, float mousex, float mousey);
-  public abstract void WorldFunctionality(GameEngine world);
+  public abstract void display(int angle);
 
 }

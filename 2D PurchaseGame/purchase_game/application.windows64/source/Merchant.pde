@@ -13,7 +13,7 @@ public class Merchant extends Entity {
   }
 
   //----------------------------------------------------------------------------------
-  void WorldFunctionality(GameEngine world) {
+  void display(int angle) {
     // implement movement at later date (no need to use angle for now)
     text("Merchant", pos.x + 1, pos.y - 20);
     ellipse(pos.x, pos.y, RAD, RAD);

@@ -27,12 +27,13 @@ public class GameEngine {
   // in charge of displaying all world entities
   public void Display(float mousex, float mousey) {
     //display entities other than player
-    //for (Entity object : entities) {
-    // object.WorldFunctionality(this);
-    //}
-    
-    for (int i = entities.size() - 1; i >= 0; i--) {
-      entities.get(i).WorldFunctionality(this);
+    for ( Entity object : entities) {
+      object.display(object.GetDirection());
+      if (object instanceof Throwable) {
+        Throwable temp = (Throwable)object;
+        temp.ThrowingMechanics();
+        temp.display();
+      }
     }
 
 

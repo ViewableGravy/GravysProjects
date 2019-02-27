@@ -18,9 +18,4 @@ public class GravyBanner extends Item implements MiscItem {
   public Item CreateNewInstance() {
     return new GravyBanner();
   }
-  
-  public void WorldFunctionality(GameEngine world) {
-    // nothing yet;
-  };
-  
 }

@@ -17,8 +17,4 @@ public class GravyArmour extends WearableItem implements ArmourItem {
   public WearableItem CreateNewInstance() {
     return new GravyArmour();
   }
-  
-   public void WorldFunctionality(GameEngine world) {
-    // nothing yet;
-  };
 }

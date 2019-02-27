@@ -103,5 +103,6 @@ public abstract class Item extends Entity {
     return "show";
   }
 
-  public abstract void WorldFunctionality(GameEngine world);
+  public  void display(int angle) { //
+  };
 }
