@@ -48,6 +48,7 @@ public class GameEngine {
     // just show items in a list in the middle top of screen
     int hei = 100;
     text("Copper: " + player.pocketMoney.copper + ", Silver: " + player.pocketMoney.silver + ", Peach: " + player.pocketMoney.peach, width/2, 50);
+    //println(frameRate);
     for (Entity obj : player.inventory) {
       text(obj.name, width/2, hei);
       hei += 15;

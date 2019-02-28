@@ -48,7 +48,7 @@ public class Boomerang extends RangedWeapon implements Throwable {
   }
   
   public void Collision(GameEngine world) {
-   if ( PVector.dist(pos,world.player.pos) < (RAD + world.player.RAD)  && flyFrames > 50) {
+   if ( PVector.dist(pos,world.player.pos) < (RAD + world.player.RAD)  && flyFrames > 20) {
     world.entities.remove(this);
     world.player.inventory.add(this);
     flyFrames = 0;
@@ -57,7 +57,10 @@ public class Boomerang extends RangedWeapon implements Throwable {
   
   public void WorldFunctionality(GameEngine world) {
    Collision(world);
-   ThrowingMechanics(world);
+   // determines how long it can fly for
+   if (flyFrames < 250) {
+     ThrowingMechanics(world);
+   }
    ellipse(pos.x,pos.y,RAD,RAD); 
   }
   
