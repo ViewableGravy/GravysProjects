@@ -4,7 +4,16 @@ public class MerchantInterface {
   private int x, y, wid, hei;
   private ArrayList<Item> allItems = new ArrayList<Item>();
   private PImage background = loadImage("TempMerchantInterface.png");
+  private CurrencyPurse TotalCost = new CurrencyPurse(0);
 
+  public CurrencyPurse GetCost() {
+    return TotalCost;
+  }
+  
+  public void ResetCost() {
+   TotalCost = new CurrencyPurse(0); 
+  }
+  
   MerchantInterface(int _x, int _y, int _wid, int _hei) {
     x = _x;
     y = _y;
@@ -32,12 +41,14 @@ public class MerchantInterface {
   void DisplayOutline() {
     //rect(x, y, wid, hei);
     image(background,0,0);
+    text("Copper: " + TotalCost.copper + ", Peaches: " + TotalCost.peach + ", Gold: " + TotalCost.gold + ", Gravy: " + TotalCost.gravy, width/2, 50);
   }
 
   public void UpdateShoppingCart() {
     for ( CategoryButton button : categories) {
       // add each item from the category into a universal array
       for (Item itm : button.shoppingCart) {
+        TotalCost = TotalCost.add(itm.Price());
         allItems.add(itm);
       }
       //Reset the arraylist once the items have been taken from it

@@ -4,11 +4,11 @@ public class Boomerang extends RangedWeapon implements Throwable {
   public boolean moving = false;
   public PVector direction = new PVector();
   public Boomerang() {
-    super("boomerang", new CurrencyPurse(0, 0, 21, 0), 10.0,300,5, "A ranged weapon, affordable to beginners");
+    super("boomerang", new CurrencyPurse(300), 10.0,300,5, "A ranged weapon, affordable to beginners");
   }
 
   public Boomerang(float _x, float _y, int _wid, int _hei, int _weight) {
-    super(_x, _y,"boomerang", new CurrencyPurse(0, 0, 21, 0),_weight, 10.0,20,5, "A ranged weapon, affordable to beginners");
+    super(_x, _y,"boomerang", new CurrencyPurse(300),_weight, 10.0,20,5, "A ranged weapon, affordable to beginners");
     wid = _wid;
     hei = _hei;
   }
@@ -40,6 +40,7 @@ public class Boomerang extends RangedWeapon implements Throwable {
   
   PVector Velocity = new PVector(0,0);
   int flyFrames = 0;
+  
   public void ThrowingMechanics(GameEngine world) {
     flyFrames++;
      direction.add( world.player.pos.copy().sub(pos).normalize().mult(0.1));

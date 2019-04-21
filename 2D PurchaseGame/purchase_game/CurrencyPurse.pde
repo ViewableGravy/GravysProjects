@@ -1,86 +1,42 @@
 
 class CurrencyPurse {
-  public int copper, silver, peach, gravy;
-  CurrencyPurse(String username) {
-    String temp = "";
-    try {
-    JSONObject something = loadJSONObject("https://api.streamelements.com/kappa/v2/points/5c235339072350ec38cd501f/top");
-    JSONArray users = something.getJSONArray("users");
-    //println(users);
-    
-    for(int i = 0; i < users.size(); i++) {
-      JSONObject user = users.getJSONObject(i);
-      if (user.get("username").equals(username.toLowerCase())) {
-        temp = user.get("points").toString(); 
-      }
-    }
-    println("done");
-  } 
-  catch (Exception e) {
-  }
-    copper = 0;
-    silver = 0;
-    peach = int(temp);
-    gravy = 0;
-  }
+  public int copper, peach, gold, gravy;
+  private final int COPPER_TO_GRAVY = 10000;
+  private final int COPPER_TO_GOLD = 1000;
+  private final int COPPER_TO_PEACH = 100;
   
-  CurrencyPurse(int cop, int sil, int _peach, int grav) {
-     copper = cop;
-    silver = sil;
-    peach = _peach;
-    gravy = grav;
-  }
-  
-  
-  // could have functions to calculate the amount in other currency e.g. gold to silver
-
-  public void ConvertDown(int amount, String type) {
-    switch(type) {
-    case "silver" :
-      if (silver >= amount) {
-        copper+= amount*10;
-        silver-= amount;
-      }
-      break;
-    case "peach" :
-      if (peach >= amount) {
-        silver+= amount*10;
-        peach-= amount;
-      }
-      break;
-    case "gravy" :
-      if (gravy >= amount) {
-        peach += amount * 10;
-        gravy -= amount;
-      }
-      break;
-    default:
-      println("Unknown currency");
-    }
+  //takes a value in copper and converts it up
+  public CurrencyPurse(int inCopper) {
+   gravy = floor(inCopper / COPPER_TO_GRAVY);
+   copper = inCopper % COPPER_TO_GRAVY;
+   gold = floor(copper / COPPER_TO_GOLD);
+   copper %= COPPER_TO_GOLD;
+   peach = floor(copper/COPPER_TO_PEACH);
+   copper %= 100;
   }
 
-  public void ConvertUp(int amount, String type) {
-    switch(type) {
-      case "silver" :
-        if (silver >= amount && amount % 10 == 1) {
-          peach+= amount/10;
-          silver-= amount;
-        }
-        break;
-      case "peach" :
-        if (peach >= amount && amount % 10 == 1) {
-          gravy+= amount/10;
-          peach-= amount;
-        }
-        break;
-      case "copper" :
-        if (copper >= amount && amount % 10 == 1) {
-          silver += amount/10;
-          copper -= amount;
-        }
-        break;
-      default:
-        println("Unknown currency");
+  //adds two currency purses
+  public CurrencyPurse add(CurrencyPurse purse) {
+    return new CurrencyPurse(ToCopper(this) + ToCopper(purse));
+  }
+  
+  //subtracts two currency purses (Throws exception if the second is larger than first)
+  public CurrencyPurse sub(CurrencyPurse cp) throws Exception {
+    int newCopper = ToCopper(this) - ToCopper(cp);
+    if (newCopper >= 0) {
+     return new CurrencyPurse(newCopper); 
+    } else {
+     throw new Exception("Cannot Subtract money");
     }
+  }
+  
+  //converts a currency purse to copper
+  public int ToCopper(CurrencyPurse cp) {
+    int Copper = 0;
+    Copper+=cp.copper;
+    Copper+=cp.peach*COPPER_TO_PEACH;
+    Copper+=cp.gold*COPPER_TO_GOLD;
+    Copper+=cp.gravy*COPPER_TO_GRAVY;
+    return Copper;
   }
 }

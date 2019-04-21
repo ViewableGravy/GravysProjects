@@ -1,4 +1,7 @@
-
+enum GameState {
+  World, 
+  Interacting
+}
 
 public class GameEngine {
   final int RAD = 20;
@@ -13,6 +16,11 @@ public class GameEngine {
   ArrayList<Entity> entities;
   boolean keyClickReady = true;
 
+  char key;
+  float mousex, mousey;
+
+  GameState GS = GameState.World;
+
   // declare all entities in the game engine (the setup of the world)
   public GameEngine(int wid, int hei) {
     player = new Player(wid/3, hei/2);
@@ -25,12 +33,12 @@ public class GameEngine {
   }
 
   // in charge of displaying all world entities
-  public void Display(float mousex, float mousey) {
+  public void Display() {
     //display entities other than player
     //for (Entity object : entities) {
     // object.WorldFunctionality(this);
     //}
-    
+
     for (int i = entities.size() - 1; i >= 0; i--) {
       entities.get(i).WorldFunctionality(this);
     }
@@ -40,63 +48,89 @@ public class GameEngine {
     player.display(player.Direction(mousex, mousey));
   }
 
-  // what does the game need to do every frame? Ideally this is not linked to the frameRate but for now it is.
-  public void tick(float mousex, float mousey, char key) {
-    ///////////////////////////
-    // information displaying //
+  void PlayerMovement() {
+    if (keyPressed) {        //Move mechanics
+      player.move(key);
+    }
+  }
 
+  //currently only works with boomerang
+  void UsePlayerHotbar() {
+    if (keyReleased ) {
+      keyClickReady = true;
+    }
+    if (keyClickReady) {
+      if (keyPressed) {
+        if (key == ' ') {
+          keyClickReady = false;
+          Entity temp = player.ThrowSelectedItem(mousex, mousey);
+          if (temp != null) {
+            entities.add(temp);
+          }
+        }
+      }
+    }
+  }
+
+  void DecideInteractEntity() {
+    currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities, key, THREESIXTY, COLLIDEANGLE) ;
+    if (currentInteractingEntity != null) {
+      GS = GameState.Interacting;
+    }
+  }
+
+  void InterfaceEntity() {
+    try {
+    currentInteractingEntity.keyReleased = keyReleased;
+    currentInteractingEntity.mouseReleased = mouseReleased;
+    
+    // run the InteractionInterface (this should return an object with purchased items (or none if none purchased)
+    boolean ShowInteractionInterface = currentInteractingEntity.ShowInteractionInterface(player, mousex, mousey);
+    if (!ShowInteractionInterface) {
+      currentInteractingEntity = null;
+      GS = GameState.World;
+    }
+    } catch (Exception e) {
+     println("object does not exist"); 
+    }
+  } 
+  
+  //Heads up display
+  void HUD() {
+    // information displaying //
     // just show items in a list in the middle top of screen
     int hei = 100;
-    text("Copper: " + player.pocketMoney.copper + ", Silver: " + player.pocketMoney.silver + ", Peach: " + player.pocketMoney.peach, width/2, 50);
+    text("Copper: " + player.pocketMoney.copper + ", Peaches: " + player.pocketMoney.peach + ", Gold: " + player.pocketMoney.gold + ", Gravy: " + player.pocketMoney.gravy, width/2, 50);
     //println(frameRate);
     for (Entity obj : player.inventory) {
       text(obj.name, width/2, hei);
       hei += 15;
     }
+  }
 
+  // what does the game need to do every frame? Ideally this is not linked to the frameRate but for now it is.
+  public void tick(float _mousex, float _mousey, char _key) {
+    key = _key;
+    mousex = _mousex;
+    mousey = _mousey;
+    
+    
 
-
-    // if the player is not interacting with an entity then show environment
-    if (currentInteractingEntity == null) {
-      currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities, key, THREESIXTY, COLLIDEANGLE); //determine if player is interacting with entity
-      
-      Display(mousex, mousey); //Display all entities
-      if (keyPressed) {        //Move mechanics
-        player.move(key);
-      }
-      
-      //Key only registers once per click
-      if (keyReleased ) {
-        keyClickReady = true;
-      }
-      if (keyClickReady) {
-        if (keyPressed) {
-          if (key == ' ') {
-            keyClickReady = false;
-            Entity temp = player.ThrowSelectedItem(mousex, mousey);
-            if (temp != null) {
-              entities.add(temp);
-            }
-          }
-        }
-      }
-    } 
-    
-    
-    
-    
-    // if the player is interacting with an entity then display the entities interaction interface
-    else 
+    switch (GS)  //<>//
     {
-      // tell the interacting entity whether or not a key/mousebutton has been released
-      currentInteractingEntity.keyReleased = keyReleased;
-      currentInteractingEntity.mouseReleased = mouseReleased;
-      
-      // run the InteractionInterface (this should return an object with purchased items (or none if none purchased)
-      boolean ShowInteractionInterface = currentInteractingEntity.ShowInteractionInterface(player, mousex, mousey);
-      if (!ShowInteractionInterface) {
-        currentInteractingEntity = null;
-      }
+      // if the player is not interacting with an entity then show environment
+      case World:
+        HUD();
+        Display(); //display all entities
+        PlayerMovement(); //allow for character movement
+        UsePlayerHotbar(); //utilise item in player hotbar slot
+        DecideInteractEntity(); //check if the player is interacting with an entity
+        break;
+        //show the interaction of entity that player is interacting with
+      case Interacting:
+      //show interaction interface, also in charge of changing game state back to world
+        InterfaceEntity();
+        break;
     }
   }
 }

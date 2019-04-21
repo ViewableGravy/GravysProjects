@@ -3,11 +3,35 @@ public class Player extends WorldObject {
 
   public ArrayList<Entity> inventory = new ArrayList<Entity>(); //probably should change to private
 
-  // for now i will just make this me but future should be able to create your character with personal details
-  public CurrencyPurse pocketMoney = new CurrencyPurse(name); 
 
+  public CurrencyPurse pocketMoney; 
+
+//currently works off a string but will input based on username
   Player(float x, float y) {
-    super(x, y, 20, "Fuzedpeach");
+    super(x, y, 20, "ViewableGravy");
+    
+    
+    try {
+      int temp = 0;
+      JSONObject something = loadJSONObject("https://api.streamelements.com/kappa/v2/points/5c235339072350ec38cd501f/top");
+      JSONArray users = something.getJSONArray("users");
+      //println(users);
+    
+      for(int i = 0; i < users.size(); i++) {
+        JSONObject user = users.getJSONObject(i);
+        if (user.get("username").equals("ViewableGravy".toLowerCase())) {
+          temp = (int)user.get("points");
+        }
+      }
+      
+      pocketMoney = new CurrencyPurse(temp * 100);
+      //pocketMoney = new CurrencyPurse(2983729);
+      println("Created Player Currency Purse");
+      
+    } 
+    catch (Exception e) {}
+     
+       
   }
 
   public void display() {

@@ -7,6 +7,7 @@ public class CategoryButton {
   public CategoryItems itemcategory;
   private ArrayList<Item> shoppingCart = new ArrayList<Item>();
   boolean mouseReleased = false;
+  public CurrencyPurse cost = new CurrencyPurse(0);
 
 
   public CategoryButton(categoryEnum _category, int _x, int _y, int _wid, int _hei, CategoryItems cat) {
@@ -63,6 +64,7 @@ public class CategoryButton {
     } else {
       Item item = itemcategory.Clicked(mousex, mousey);
       if (item != null) {
+        cost = cost.add(item.Price());
         shoppingCart.add(item);
         item = null;
       }

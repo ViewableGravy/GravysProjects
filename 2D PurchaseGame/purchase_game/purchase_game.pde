@@ -11,7 +11,7 @@ void setup() {
   gameengine =  new GameEngine(width, height);
 }
 
-void draw() {
+void draw() { //<>//
   background(100);
 
   gameengine.tick(mouseX, mouseY, key);

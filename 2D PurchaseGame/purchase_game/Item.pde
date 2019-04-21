@@ -23,6 +23,10 @@ public abstract class Item extends Entity {
     category = _category;
   }
 
+  CurrencyPurse Price() {
+    return cost;
+  }
+
   public Entity interact(char key) {
     return null; /*this is not implemented yet for this object */
   };

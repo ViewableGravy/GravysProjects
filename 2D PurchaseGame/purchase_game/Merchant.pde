@@ -39,18 +39,29 @@ public class Merchant extends Entity {
       ready = false;
       if (key == ENTER) {
         if (Interface.keypress()) {
-          PreparePurchase = null;
-          for (Item itm : Interface.allItems) {
-            player.inventory.add(itm);
+          //--------------------
+          // attempts to subtract from the player and then gives them the items if it can afford.
+          try {
+            player.pocketMoney = player.pocketMoney.sub(Interface.GetCost());
+            Interface.ResetCost();
+            PreparePurchase = null;
+            for (Item itm : Interface.allItems) {
+              player.inventory.add(itm);
+            }
+            Interface.allItems = new ArrayList<Item>();
+            return false;
+          } 
+          catch(Exception e) {
+            println("Player Cannot afford Items, please restart");
           }
-          Interface.allItems = new ArrayList<Item>();
-          return false;
+          //---------------------
         } else {
           Interface.UpdateShoppingCart();
           Interface.ShowShoppingList();
         }
       }
     }
+
     if (keyReleased) {
       ready = true;
     }
