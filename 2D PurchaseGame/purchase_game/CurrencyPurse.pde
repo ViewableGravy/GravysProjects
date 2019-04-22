@@ -1,6 +1,6 @@
 
 class CurrencyPurse {
-  public int copper, peach, gold, gravy;
+  private int copper, peach, gold, gravy;
   private final int COPPER_TO_GRAVY = 10000;
   private final int COPPER_TO_GOLD = 1000;
   private final int COPPER_TO_PEACH = 100;

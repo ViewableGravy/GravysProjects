@@ -7,7 +7,6 @@ public class GameEngine {
   final int RAD = 20;
   final int COLLIDEANGLE = 30;
   final int THREESIXTY = 360;
-  final int INTERACT_DISTANCE = 45;
   boolean display = true;
   Player player;
   Merchant entity, entity2;
@@ -16,7 +15,6 @@ public class GameEngine {
   boolean mouseReleased = true;
   ArrayList<Entity> entities;
   boolean keyClickReady = true;
-  
 
   char key;
   float mousex, mousey;
@@ -74,27 +72,23 @@ public class GameEngine {
     }
   }
 
-  //natively returns whether a player is within distance of the square of an entities radius (could change to an actual distance in future)
-  boolean Range(Player plr, Entity entity) {
-    return plr.Heading(entity.pos.x,entity.pos.y).magSq() < sq(INTERACT_DISTANCE);
-  }
-
-  Entity RequestInteraction(Player plr, ArrayList<Entity> entities){
+  Entity RequestInteraction(Player plr, ArrayList<Entity> entities) {
     for (Entity entity : entities) {
-      if (Range(plr,entity)) {
       PVector EntClone = entity.pos.copy();
       PVector EntHeading = EntClone.sub(player.pos);
-      int DegreeToEntity = round(map(atan2(EntHeading.y, EntHeading.x), PI, -PI, -180, 180)) ; 
-        if (plr.InteractDistanceEntity(DegreeToEntity,plr.Direction(mousex,mousey))) {
-          return entity.interact(key);
-        }
+      int DegreeToEntity = round(map(atan2(headingent.y, headingent.x), PI, -PI, -180, 180)) ; 
+
+      if (player.InteractDistance(DegreeToEntity,key)) {
+        return entity.interact(key);
+      } else {
+        return null;
       }
     }
-    return null;
   }
 
   void DecideInteractEntity() {
     currentInteractingEntity = RequestInteraction(player,entities);
+    currentInteractingEntity = player.InteractDistanceEntity(player.Direction(mousex, mousey), entities) ;
     if (currentInteractingEntity != null) {
       GS = GameState.Interacting;
     }
@@ -116,7 +110,7 @@ public class GameEngine {
     }
   } 
   
-  //Heads up display //<>//
+  //Heads up display
   void HUD() {
     // information displaying //
     // just show items in a list in the middle top of screen

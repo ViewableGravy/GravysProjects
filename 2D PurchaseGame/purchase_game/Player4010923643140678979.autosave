@@ -63,21 +63,27 @@ public class Player extends WorldObject {
     return mousepos.sub(pos);
   }
 
-  boolean InteractDistanceEntity(int pointingCharAsDegree, int pointingCharEntAsDegree) {
-    //collision logic (only occurs when close to an entity)
-    if (pointingCharEntAsDegree > 160) {
-      int tempdegrees = -THREESIXTY + pointingCharEntAsDegree + COLLIDEANGLE;
-      if ((pointingCharAsDegree > pointingCharEntAsDegree  - COLLIDEANGLE)  || pointingCharAsDegree < tempdegrees) {
-        return true;
-      }
-    } else if (pointingCharEntAsDegree < -160) {
-      int tempdegrees = THREESIXTY + pointingCharEntAsDegree - COLLIDEANGLE;
-      if ((pointingCharAsDegree < pointingCharEntAsDegree  + COLLIDEANGLE)  || pointingCharAsDegree > tempdegrees) {
-        return true;
-      }
-    } else {
-      if (pointingCharEntAsDegree > pointingCharAsDegree - COLLIDEANGLE && pointingCharEntAsDegree < pointingCharAsDegree + COLLIDEANGLE) {
-        return true;
+  Entity InteractDistanceEntity(int pointingCharAsDegreechar) {
+
+    for (Entity obj : entities ) {
+      if (headingent.magSq() < sq(RAD)) {
+        //collision logic (only occurs when close to an entity)
+      } else if (headingent.magSq() < sq(40)) {
+        if (pointingCharEntAsDegree > 160) {
+          int tempdegrees = -THREESIXTY + pointingCharEntAsDegree + COLLIDEANGLE;
+          if ((pointingCharAsDegree > pointingCharEntAsDegree  - COLLIDEANGLE)  || pointingCharAsDegree < tempdegrees) {
+            return true;
+          }
+        } else if (pointingCharEntAsDegree < -160) {
+          int tempdegrees = THREESIXTY + pointingCharEntAsDegree - COLLIDEANGLE;
+          if ((pointingCharAsDegree < pointingCharEntAsDegree  + COLLIDEANGLE)  || pointingCharAsDegree > tempdegrees) {
+            return true;
+          }
+        } else {
+          if (pointingCharEntAsDegree > pointingCharAsDegree - COLLIDEANGLE && pointingCharEntAsDegree < pointingCharAsDegree + COLLIDEANGLE) {
+            return true;
+          }
+        }
       }
     }
     return false;

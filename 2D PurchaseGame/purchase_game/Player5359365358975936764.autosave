@@ -63,7 +63,7 @@ public class Player extends WorldObject {
     return mousepos.sub(pos);
   }
 
-  boolean InteractDistanceEntity(int pointingCharAsDegree, int pointingCharEntAsDegree) {
+  Entity InteractDistanceEntity(int pointingCharAsDegree, char key) {
     //collision logic (only occurs when close to an entity)
     if (pointingCharEntAsDegree > 160) {
       int tempdegrees = -THREESIXTY + pointingCharEntAsDegree + COLLIDEANGLE;
