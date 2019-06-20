@@ -104,7 +104,6 @@ public class GameEngine {
     try {
     currentInteractingEntity.keyReleased = keyReleased;
     currentInteractingEntity.mouseReleased = mouseReleased;
-    
     // run the InteractionInterface (this should return an object with purchased items (or none if none purchased)
     boolean ShowInteractionInterface = currentInteractingEntity.ShowInteractionInterface(player, mousex, mousey);
     if (!ShowInteractionInterface) {
@@ -117,7 +116,7 @@ public class GameEngine {
   } 
   
   //Heads up display //<>//
-  void HUD() {
+  void HUD() { //<>//
     // information displaying //
     // just show items in a list in the middle top of screen
     int hei = 100;
@@ -138,7 +137,7 @@ public class GameEngine {
     
 
     switch (GS)  //<>//
-    {
+    { //<>//
       // if the player is not interacting with an entity then show environment
       case World:
         HUD();
