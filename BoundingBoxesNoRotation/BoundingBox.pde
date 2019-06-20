@@ -3,6 +3,14 @@ public class BoundingBox {
   float wid,hei;
   boolean processing = false;
   
+  public PVector GetPos() {
+   return pos; 
+  }
+  
+  public PVector GetWidHei() {
+   return new PVector(wid,hei); 
+  }
+  
   BoundingBox(int x, int y, int wid, int hei) {
     this.pos = new PVector(x,y);
     this.wid = wid;
@@ -50,5 +58,14 @@ public class BoundingBox {
   public void translate(int x, int y) {
     this.pos.x += x;
     this.pos.y += y;
+  }
+  
+  public void Save(PrintWriter output, String indentation) {
+    output.println(indentation + "Position {");
+    output.println(indentation + "  x: " + pos.x);
+    output.println(indentation + "  y: " + pos.y);
+    output.println(indentation + "},");
+    output.println(indentation +"Width: " + wid);
+    output.println(indentation +"Height: " + hei);
   }
 }
