@@ -1,10 +1,39 @@
 public class BoundingBox {
   PVector pos;
-  int wid,hei;
+  float wid,hei;
+  boolean processing = false;
+  
   BoundingBox(int x, int y, int wid, int hei) {
     this.pos = new PVector(x,y);
     this.wid = wid;
     this.hei = hei;
+  }
+  
+  BoundingBox(int x, int y) {
+    processing = true;
+    this.pos = new PVector(x,y);
+  }
+  
+  public void UpdateParameters(int x, int y) {
+    if (processing) {
+      this.wid = x - this.pos.x;
+      this.hei = y - this.pos.y;
+    }
+  }
+  
+  public void Confirm() {
+    
+    if (wid < 0) { //<>//
+     pos.x += wid;
+     wid = abs(wid);
+    }
+    
+    if (hei < 0) {
+     pos.y += hei;
+     hei = abs(hei);
+    }
+    
+    processing = false;
   }
   
   public boolean Collide(BoundingBox other) {

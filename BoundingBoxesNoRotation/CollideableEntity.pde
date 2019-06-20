@@ -1,12 +1,20 @@
 class CollideableEntity {
-  BoundingBox[] boundingboxes;
+  ArrayList<BoundingBox> boxes = new ArrayList<BoundingBox>();
+  
   CollideableEntity(BoundingBox[] boundingboxes) {
-    this.boundingboxes = boundingboxes;
+    for (BoundingBox box : boundingboxes) {
+      boxes.add(box);
+    }
+  }
+  
+  public void addBox(BoundingBox box) {
+    box.Confirm();
+    boxes.add(box);
   }
 
   public boolean Collide(CollideableEntity other) {
-    for (BoundingBox box : boundingboxes) {
-      for (BoundingBox otherbox : other.boundingboxes) {
+    for (BoundingBox box : boxes) {
+      for (BoundingBox otherbox : other.boxes) {
         if (box.Collide(otherbox)) {
           return true;
         }
@@ -16,13 +24,13 @@ class CollideableEntity {
   }
   
   public void Display() {
-   for (BoundingBox box : boundingboxes) {
+   for (BoundingBox box : boxes) {
     box.Display(); 
    }
   }
   
   public void translate(int x, int y) {
-    for (BoundingBox box : boundingboxes) {
+    for (BoundingBox box : boxes) {
      box.translate(x,y); 
     }
   }
