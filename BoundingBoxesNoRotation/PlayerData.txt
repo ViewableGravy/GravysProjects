@@ -2,131 +2,19 @@ Player: {
   boxes: [
     box: {
       Position {
-        x: 172.0
-        y: 252.0
-      },
-      Width: 100.0
-      Height: 100.0
-    },
-    box: {
-      Position {
-        x: 168.0
-        y: 317.0
+        x: 142.0
+        y: 394.0
       },
       Width: 108.0
       Height: 54.0
     },
     box: {
       Position {
-        x: 134.0
-        y: 332.0
+        x: 108.0
+        y: 409.0
       },
       Width: 62.0
       Height: 68.0
-    },
-    box: {
-      Position {
-        x: 261.0
-        y: 342.0
-      },
-      Width: 37.0
-      Height: 89.0
-    },
-    box: {
-      Position {
-        x: 121.0
-        y: 243.0
-      },
-      Width: 26.0
-      Height: 32.0
-    },
-    box: {
-      Position {
-        x: 109.0
-        y: 232.0
-      },
-      Width: 20.0
-      Height: 28.0
-    },
-    box: {
-      Position {
-        x: 103.0
-        y: 190.0
-      },
-      Width: 10.0
-      Height: 53.0
-    },
-    box: {
-      Position {
-        x: 93.0
-        y: 142.0
-      },
-      Width: 16.0
-      Height: 60.0
-    },
-    box: {
-      Position {
-        x: 101.0
-        y: 124.0
-      },
-      Width: 24.0
-      Height: 37.0
-    },
-    box: {
-      Position {
-        x: 118.0
-        y: 115.0
-      },
-      Width: 24.0
-      Height: 22.0
-    },
-    box: {
-      Position {
-        x: 132.0
-        y: 105.0
-      },
-      Width: 76.0
-      Height: 16.0
-    },
-    box: {
-      Position {
-        x: 202.0
-        y: 99.0
-      },
-      Width: 41.0
-      Height: 12.0
-    },
-    box: {
-      Position {
-        x: 234.0
-        y: 98.0
-      },
-      Width: 68.0
-      Height: 8.0
-    },
-    box: {
-      Position {
-        x: 292.0
-        y: 102.0
-      },
-      Width: 25.0
-      Height: 16.0
-    },
-    box: {
-      Position {
-        x: 313.0
-        y: 111.0
-      },
-      Width: 87.0
-      Height: 20.0
-    },
-    box: {
-      Position {
-        x: 391.0
-        y: 122.0
-      },
-      Width: 33.0
-      Height: 33.0
     }
   ]
 },
@@ -139,14 +27,6 @@ Player: {
       },
       Width: 100.0
       Height: 100.0
-    },
-    box: {
-      Position {
-        x: 334.0
-        y: 312.0
-      },
-      Width: 60.0
-      Height: 82.0
     }
   ]
 }

@@ -11,6 +11,8 @@ public class BoundingBox {
    return new PVector(wid,hei); 
   }
   
+  
+  
   BoundingBox(int x, int y, int wid, int hei) {
     this.pos = new PVector(x,y);
     this.wid = wid;
@@ -51,6 +53,12 @@ public class BoundingBox {
            pos.y + hei > other.pos.y;
   }
   
+  public boolean Collide(float x, float y) {
+    return x > pos.x && 
+           x < pos.x + wid &&
+           y > pos.y && 
+           y < pos.y + hei;
+  }
   public void Display() {
    rect(pos.x,pos.y,wid,hei); 
   }

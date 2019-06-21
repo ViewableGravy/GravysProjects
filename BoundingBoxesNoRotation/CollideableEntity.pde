@@ -1,3 +1,4 @@
+
 class CollideableEntity {
   ArrayList<BoundingBox> boxes = new ArrayList<BoundingBox>();
   BoundingBox surroundingBox;
@@ -16,20 +17,30 @@ class CollideableEntity {
     UpdateSurroundingBox();
   }
 
-  public void Save(PrintWriter output, String indent) {
+  //Saves object to a file which can be loaded from.
+  // output is a PrintWriter object that points to a textfile to write to
+  // indent is the current indentation in the file, this is useful for proper formatting but is technically not needed
+  // lastElement dictates if this is the lastElement in it's encapsulating datastructure.
+  //     this should be true if it is the only one to save, otherwise determine if it is the last to be saved inside the Object
+  public void Save(PrintWriter output, String indent, boolean lastElement) {
+    output.println(indent + "Player: {");
+    indent += "  ";
     output.println(indent + "boxes: [");
-    int i = 1;
     indent += "  ";
     for (int j = 0; j < boxes.size(); j++) {
       output.println(indent + "box: {");
       boxes.get(j).Save(output, indent + "  ");
-      if (j == boxes.size() - 1) {
+      if (j == boxes.size() - 1)
         output.println(indent + "}");
-      } else {
+      else
         output.println(indent + "},");
-      }
     }
-    output.println(indent.substring(2) + "]");
+    indent = indent.substring(2);
+    output.println(indent + "]");
+    if (lastElement)
+      output.println(indent.substring(2) + "}");
+    else 
+    output.println(indent.substring(2) + "},");
   }
 
   private void UpdateSurroundingBox() {
@@ -78,6 +89,16 @@ class CollideableEntity {
     //surroundingBox.Display();
     for (BoundingBox box : boxes) {
       box.Display();
+    }
+  }
+
+  public void RemoveAt(float x, float y) {
+    for (BoundingBox box : boxes) {
+      if ( box.Collide(x, y)) {
+        boxes.remove(box);
+        UpdateSurroundingBox();
+        break; // only remove one box at a time (search top down to remove top)
+      }
     }
   }
 

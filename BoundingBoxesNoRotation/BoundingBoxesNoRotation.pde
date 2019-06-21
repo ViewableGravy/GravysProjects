@@ -1,21 +1,18 @@
+
+
 //CollideableEntity[] players;
 ArrayList<CollideableEntity> players = new ArrayList<CollideableEntity>();
-int CurrentEntity = 1;
 ArrayList<Character> keys = new ArrayList<Character>();
 boolean ctrl = false;
+int CurrentEntity = 1;
+State currentMode = State.gameMode;
 
 void setup() {
-  fill(255);
   strokeWeight(2);
   stroke(255);
   frameRate(60);
   size(500, 500);
   Load("PlayerData.txt");
-  /*
-    players = new CollideableEntity[2];
-   players[0] =  new CollideableEntity(new BoundingBox[]{new BoundingBox(100, 100, 100, 100)});
-   players[1] = new CollideableEntity(new BoundingBox[]{new BoundingBox(350, 350, 100, 100)});
-   */
 }
 
 void draw() {
@@ -26,10 +23,18 @@ void draw() {
     player.Display();
   }
 
-  //Add hitbox
-  if (temp != null) {
-    temp.UpdateParameters(mouseX, mouseY); 
-    temp.Display();
+  switch(currentMode) {
+  case insertMode:
+    //Add hitbox
+    if (temp != null) {
+      temp.UpdateParameters(mouseX, mouseY); 
+      temp.Display();
+    }
+    break;
+  case deleteMode:
+    break;
+  case gameMode: 
+    break;
   }
 
   //movement
@@ -38,16 +43,23 @@ void draw() {
   textSize(20);
   stroke(0, 255, 0);
   text(CurrentEntity, 10, 30);
+  text(currentMode.toString(), 10, 60);
 }
 
 BoundingBox temp = null;
 void mouseClicked() {
-  if (temp == null) {
-    temp = new BoundingBox(mouseX, mouseY);
-  } else {
-    players.get(CurrentEntity-1).addBox(temp);
-    temp = null;
+  //if insert mode, deal with hitbox creation
+  if (currentMode == State.insertMode) {
+    if (temp == null) {
+      temp = new BoundingBox(mouseX, mouseY);
+    } else {
+      players.get(CurrentEntity-1).addBox(temp);
+      temp = null;
+    }
+  } else if (currentMode == State.deleteMode) {
+    players.get(CurrentEntity - 1).RemoveAt(mouseX,mouseY);
   }
+  
 }
 
 void keyReleased() {
@@ -63,6 +75,18 @@ void keyReleased() {
 void keyPressed() {
   if (keyCode == CONTROL) {
     ctrl = true;
+  }
+
+  if (key == 'r') {
+    currentMode = State.deleteMode;
+  }
+
+  if (key == 'e') {
+    currentMode = State.insertMode;
+  }
+
+  if (key == 'g') {
+    currentMode = State.gameMode;
   }
 
   if (!keys.contains((Character)key)) {
@@ -148,7 +172,7 @@ void Load(String filename) {
       line = reader.readLine(); //Player: {
       line = reader.readLine(); //boxes: [
       while (!GRAVYEndArray(line)) {
-        int x,y;
+        int x, y;
         int hei, wid;
         line = reader.readLine(); //box: {
         line = reader.readLine(); //Position {
@@ -180,18 +204,16 @@ void Load(String filename) {
 
 void Save() {
   PrintWriter output = createWriter("PlayerData.txt");
-  int i = 1;
-
   for (int j = 0; j < players.size(); j++) {
-    output.println("Player: {");
-    String indent = "  ";
-    players.get(j).Save(output, indent);
-    if (j == players.size() - 1) {
-      output.println("}");
-    } else {
-      output.println("},");
-    }
+    boolean lastElement = j == players.size() - 1;
+    players.get(j).Save(output, "", lastElement);
   }
   output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file
+}
+
+enum State {
+  deleteMode, 
+    insertMode, 
+    gameMode
 }
