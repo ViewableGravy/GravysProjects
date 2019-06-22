@@ -2,16 +2,16 @@ Player: {
   boxes: [
     box: {
       Position {
-        x: 142.0
-        y: 394.0
+        x: 161.0
+        y: 353.0
       },
       Width: 108.0
       Height: 54.0
     },
     box: {
       Position {
-        x: 108.0
-        y: 409.0
+        x: 127.0
+        y: 368.0
       },
       Width: 62.0
       Height: 68.0

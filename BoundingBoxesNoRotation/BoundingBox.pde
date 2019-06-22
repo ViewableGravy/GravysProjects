@@ -68,12 +68,19 @@ public class BoundingBox {
     this.pos.y += y;
   }
   
-  public void Save(PrintWriter output, String indentation) {
+  //pass in the current indentation, rather than the desired indentationn
+  public void Save(PrintWriter output, String indentation, boolean lastElement) {
+    output.println(indentation + "box: {");
+    indentation += "  ";
     output.println(indentation + "Position {");
     output.println(indentation + "  x: " + pos.x);
     output.println(indentation + "  y: " + pos.y);
     output.println(indentation + "},");
     output.println(indentation +"Width: " + wid);
     output.println(indentation +"Height: " + hei);
+    if (lastElement)
+        output.println(indentation.substring(2) + "}");
+      else
+        output.println(indentation.substring(2) + "},");
   }
 }

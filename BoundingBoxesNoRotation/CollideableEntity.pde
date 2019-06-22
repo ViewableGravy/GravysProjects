@@ -23,24 +23,17 @@ class CollideableEntity {
   // lastElement dictates if this is the lastElement in it's encapsulating datastructure.
   //     this should be true if it is the only one to save, otherwise determine if it is the last to be saved inside the Object
   public void Save(PrintWriter output, String indent, boolean lastElement) {
-    output.println(indent + "Player: {");
+    output.println(indent + "Player: {"); // this is a player
     indent += "  ";
-    output.println(indent + "boxes: [");
-    indent += "  ";
+    output.println(indent + "boxes: ["); //this is an array of boxes
     for (int j = 0; j < boxes.size(); j++) {
-      output.println(indent + "box: {");
-      boxes.get(j).Save(output, indent + "  ");
-      if (j == boxes.size() - 1)
-        output.println(indent + "}");
-      else
-        output.println(indent + "},");
+      boxes.get(j).Save(output, indent + "  ", j == boxes.size() - 1);
     }
-    indent = indent.substring(2);
-    output.println(indent + "]");
+    output.println(indent + "]"); //finish indentation for array
     if (lastElement)
       output.println(indent.substring(2) + "}");
     else 
-    output.println(indent.substring(2) + "},");
+      output.println(indent.substring(2) + "},");
   }
 
   private void UpdateSurroundingBox() {

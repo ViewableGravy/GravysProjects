@@ -205,8 +205,7 @@ void Load(String filename) {
 void Save() {
   PrintWriter output = createWriter("PlayerData.txt");
   for (int j = 0; j < players.size(); j++) {
-    boolean lastElement = j == players.size() - 1;
-    players.get(j).Save(output, "", lastElement);
+    players.get(j).Save(output, "", j == players.size() - 1); // "" for no indentation
   }
   output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file

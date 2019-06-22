@@ -33,3 +33,11 @@ note: each entity has an array of hitboxes but also stores information for an ov
 e.g. quadtree
 
 information for all entities is stored in the textfile "PlayerData.txt" and consequently read from also.
+
+future implementations:
+	entities have sprites (images)
+		overall hitbox should cover the image area
+	Scale entity + hitboxes to allow the same entity to be created in a different size
+	Separated into separate program:
+		Store entities within a quadTree using largest rectangle as quad dictator
+		collision entirely on quadtree
