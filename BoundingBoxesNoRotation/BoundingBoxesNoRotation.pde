@@ -69,7 +69,6 @@ void mouseClicked() {
       players.get(CurrentEntity-1).RemoveAt(remover);
       remover = null;
     }
-    players.get(CurrentEntity - 1).RemoveAt(mouseX, mouseY);
   }
 }
 
