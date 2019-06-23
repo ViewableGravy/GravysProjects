@@ -1,32 +1,96 @@
 Player: {
+  Name:      ViewableGravy
+  Position {
+    x: 17.0
+    y: 61.0
+  }
+  Width: 414.0
+  Height: 230.0
+  Location: noback.png
   boxes: [
     box: {
       Position {
-        x: 161.0
-        y: 353.0
+        x: 17.0
+        y: 67.0
       },
-      Width: 108.0
+      Width: 102.0
+      Height: 100.0
+    },
+    box: {
+      Position {
+        x: 65.0
+        y: 151.0
+      },
+      Width: 121.0
+      Height: 140.0
+    },
+    box: {
+      Position {
+        x: 158.0
+        y: 237.0
+      },
+      Width: 183.0
       Height: 54.0
     },
     box: {
       Position {
-        x: 127.0
-        y: 368.0
+        x: 284.0
+        y: 144.0
       },
-      Width: 62.0
-      Height: 68.0
+      Width: 95.0
+      Height: 95.0
+    },
+    box: {
+      Position {
+        x: 363.0
+        y: 130.0
+      },
+      Width: 68.0
+      Height: 36.0
+    },
+    box: {
+      Position {
+        x: 313.0
+        y: 61.0
+      },
+      Width: 100.0
+      Height: 83.0
+    },
+    box: {
+      Position {
+        x: 112.0
+        y: 79.0
+      },
+      Width: 232.0
+      Height: 31.0
+    },
+    box: {
+      Position {
+        x: 262.0
+        y: 65.0
+      },
+      Width: 90.0
+      Height: 22.0
     }
   ]
 },
 Player: {
+  Name:      Other
+  Position {
+    x: 300.0
+    y: 300.0
+  }
+  Width: 408.0
+  Height: 219.0
+  Location: noback.png
   boxes: [
     box: {
       Position {
-        x: 350.0
-        y: 350.0
+        x: 300.0
+        y: 300.0
       },
-      Width: 100.0
-      Height: 100.0
+      Width: 108.0
+      Height: 54.0
     }
   ]
 }

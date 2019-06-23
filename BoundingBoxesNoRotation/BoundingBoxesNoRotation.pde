@@ -12,7 +12,8 @@ void setup() {
   stroke(255);
   frameRate(60);
   size(500, 500);
-  Load("PlayerData.txt");
+  LoadMk2("PlayerData.txt");
+  //LoadMk2("TestingFile.txt");
 }
 
 void draw() {
@@ -57,9 +58,8 @@ void mouseClicked() {
       temp = null;
     }
   } else if (currentMode == State.deleteMode) {
-    players.get(CurrentEntity - 1).RemoveAt(mouseX,mouseY);
+    players.get(CurrentEntity - 1).RemoveAt(mouseX, mouseY);
   }
-  
 }
 
 void keyReleased() {
@@ -157,57 +157,28 @@ void Move() {
   }
 }
 
-boolean GRAVYEndArray(String line) {
-  return (line.contains("]") & !line.contains(","));
-}
-
-//Given that this has literally no error handling and doesn't apply for any object other than this, It still works
-void Load(String filename) {
-  ArrayList<CollideableEntity> tempArray = new ArrayList<CollideableEntity>();
+void LoadMk2(String filename) {
   BufferedReader reader = createReader(filename);
-  String line = null;
-  try {
-    do {
-      ArrayList<BoundingBox> tempBoxes = new ArrayList<BoundingBox>(); 
-      line = reader.readLine(); //Player: {
-      line = reader.readLine(); //boxes: [
-      while (!GRAVYEndArray(line)) {
-        int x, y;
-        int hei, wid;
-        line = reader.readLine(); //box: {
-        line = reader.readLine(); //Position {
-        line = reader.readLine(); //x:
-        x = (int)parseFloat(line.substring(line.lastIndexOf(":") + 1)); //error if NaN
-        line = reader.readLine(); //y:
-        y = (int)parseFloat(line.substring(line.lastIndexOf(":") + 1)); //error if NaN
-        line = reader.readLine(); // },
-        line = reader.readLine(); //Width:
-        wid = (int)parseFloat(line.substring(line.lastIndexOf(":") + 1));
-        line = reader.readLine(); //Height
-        hei = (int)parseFloat(line.substring(line.lastIndexOf(":") + 1));
-        tempBoxes.add(new BoundingBox(x, y, wid, hei));
-        //println(x + "," + y + "," + hei + "," + wid);
-        line = reader.readLine(); // },
-        if (!line.contains("},")) break;
-      }
-      line = reader.readLine(); // "]"
-      tempArray.add(new CollideableEntity(tempBoxes));
-      line = reader.readLine();
-    } while (!(line.contains("}") & !line.contains(",")));
+  while (true) {
+    try {
+      players.add(new CollideableEntity(reader));
+    } 
+    catch (IOException e) { 
+      break;
+    }
+  }
+  try { 
     reader.close();
-    players = tempArray;
   } 
   catch (IOException e) {
-    e.printStackTrace();
-  }
+  };
 }
 
 void Save() {
   PrintWriter output = createWriter("PlayerData.txt");
   for (int j = 0; j < players.size(); j++) {
-    players.get(j).Save(output, "", j == players.size() - 1); // "" for no indentation
+    players.get(j).SaveMk2(output, "", j == players.size() - 1); // "" for no indentation
   }
-  output.flush(); // Writes the remaining data to the file
   output.close(); // Finishes the file
 }
 

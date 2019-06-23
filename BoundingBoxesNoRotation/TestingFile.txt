@@ -1,0 +1,41 @@
+Player: {
+  Name: ViewableGravy
+  Position {
+    x: 300
+    y: 300
+  },
+  Width: 408
+  Height: 219
+  Location: noback.png
+  boxes: [
+    box: {
+      Position {
+        x: 300.0
+        y: 350.0
+      },
+      Width: 108.0
+      Height: 54.0
+    }
+  ]
+},
+Player: {
+  Name: Other
+  Position {
+    x: 600
+    y: 600
+  },
+  Width: 408
+  Height: 219
+  Location: noback.png
+  boxes: [
+    box: {
+      Position {
+        x: 600.0
+        y: 650.0
+      },
+      Width: 108.0
+      Height: 54.0
+    }
+  ]
+}
+
