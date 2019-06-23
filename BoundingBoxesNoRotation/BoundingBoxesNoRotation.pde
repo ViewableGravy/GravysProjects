@@ -116,43 +116,56 @@ void Move() {
   }
 
   if (keys.contains('w')) {
-    players.get(0).translate(0, -1); 
-    if (players.get(0).Collide(players.get(1))) {
-      players.get(0).translate(0, 1);
-      println(frameRate);
-      stroke(100, 0, 0);
-    } else {
-      stroke(255);
+    players.get(CurrentEntity - 1).translate(0, -1); 
+    for (int i = 0; i < players.size(); i++) {
+      if (i != CurrentEntity - 1) {
+        if (players.get(CurrentEntity - 1).Collide(players.get(i))) {
+          players.get(CurrentEntity - 1).translate(0, 1);
+          println(frameRate);
+          stroke(100, 0, 0);
+        } else {
+          stroke(255);
+        }
+      }
     }
-  } 
+  }
   if (keys.contains('s')) {
-    players.get(0).translate(0, 1); 
-    if (players.get(0).Collide(players.get(1))) {
-      players.get(0).translate(0, -1);
-      println(frameRate);
-      stroke(100, 0, 0);
-    } else {
-      stroke(255);
+    players.get(CurrentEntity - 1).translate(0, 1); 
+    for (int i = 0; i < players.size(); i++) {
+      if (i != CurrentEntity - 1) {
+        if (players.get(CurrentEntity - 1).Collide(players.get(i))) {
+          players.get(CurrentEntity - 1).translate(0, -1);
+          stroke(100, 0, 0);
+        } else {
+          stroke(255);
+        }
+      }
     }
   }
   if (keys.contains('d')) {
-    players.get(0).translate(1, 0); 
-    if (players.get(0).Collide(players.get(1))) {
-      players.get(0).translate(-1, 0);
-      println(frameRate);
-      stroke(100, 0, 0);
-    } else {
-      stroke(255);
+    players.get(CurrentEntity - 1).translate(1, 0); 
+    for (int i = 0; i < players.size(); i++) {
+      if (i != CurrentEntity - 1) {
+        if (players.get(CurrentEntity - 1).Collide(players.get(i))) {
+          players.get(CurrentEntity - 1).translate(-1, 0);
+          stroke(100, 0, 0);
+        } else {
+          stroke(255);
+        }
+      }
     }
   } 
   if (keys.contains('a')) {
-    players.get(0).translate(-1, 0); 
-    if (players.get(0).Collide(players.get(1))) {
-      players.get(0).translate(1, 0);
-      println(frameRate);
-      stroke(100, 0, 0);
-    } else {
-      stroke(255);
+    players.get(CurrentEntity - 1).translate(-1, 0); 
+    for (int i = 0; i < players.size(); i++) {
+      if (i != CurrentEntity - 1) {
+        if (players.get(CurrentEntity - 1).Collide(players.get(i))) {
+          players.get(CurrentEntity - 1).translate(1, 0);
+          stroke(100, 0, 0);
+        } else {
+          stroke(255);
+        }
+      }
     }
   }
 }

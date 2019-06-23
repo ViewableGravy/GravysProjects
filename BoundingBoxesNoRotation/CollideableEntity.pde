@@ -104,16 +104,6 @@ class CollideableEntity {
     output.println(indent.substring(2) + "},");
   }
 
-  public void Save(PrintWriter output, String indent, boolean lastElement) {
-    output.println(indent + "Player: {"); // this is a player
-    indent += "  ";
-    output.println(indent + "boxes: ["); //this is an array of boxes
-    for (int j = 0; j < boxes.size(); j++) {
-      boxes.get(j).Save(output, indent + "  ", j == boxes.size() - 1);
-    }
-    output.println(indent + "]"); //finish indentation for array
-  }
-
   private void SetSurroundBox(int x, int y, int wid, int hei) {
     surroundingBox = new BoundingBox(x, y, wid, hei);
   }
@@ -161,7 +151,9 @@ class CollideableEntity {
   }
 
   public void Display() {
-    //surroundingBox.Display();
+    fill(255,0,0);
+    surroundingBox.Display();
+    fill(0,0,255);
     for (BoundingBox box : boxes) {
       box.Display();
     }
