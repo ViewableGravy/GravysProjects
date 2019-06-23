@@ -169,6 +169,15 @@ class CollideableEntity {
       }
     }
   }
+  
+  public void RemoveAt(BoundingBox remover) {
+    remover.Confirm();
+    for(int i = boxes.size() - 1; i >= 0; i--) {
+      if (remover.Collide(boxes.get(i))) {
+        boxes.remove(i);
+      }
+    }
+  }
 
   public void translate(int x, int y) {
     for (BoundingBox box : boxes) {

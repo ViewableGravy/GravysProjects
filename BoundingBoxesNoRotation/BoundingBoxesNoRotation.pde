@@ -11,7 +11,7 @@ void setup() {
   strokeWeight(2);
   stroke(255);
   frameRate(60);
-  size(500, 500);
+  size(800, 800);
   LoadMk2("PlayerData.txt");
   //LoadMk2("TestingFile.txt");
 }
@@ -27,12 +27,16 @@ void draw() {
   switch(currentMode) {
   case insertMode:
     //Add hitbox
-    if (temp != null) {
-      temp.UpdateParameters(mouseX, mouseY); 
-      temp.Display();
+    if (inserter != null) {
+      inserter.UpdateParameters(mouseX, mouseY); 
+      inserter.Display();
     }
     break;
   case deleteMode:
+   if (remover != null) {
+      remover.UpdateParameters(mouseX, mouseY); 
+      remover.Display();
+    }
     break;
   case gameMode: 
     break;
@@ -47,17 +51,24 @@ void draw() {
   text(currentMode.toString(), 10, 60);
 }
 
-BoundingBox temp = null;
+BoundingBox inserter = null;
+BoundingBox remover = null;
 void mouseClicked() {
   //if insert mode, deal with hitbox creation
   if (currentMode == State.insertMode) {
-    if (temp == null) {
-      temp = new BoundingBox(mouseX, mouseY);
+    if (inserter == null) {
+      inserter = new BoundingBox(mouseX, mouseY);
     } else {
-      players.get(CurrentEntity-1).addBox(temp);
-      temp = null;
+      players.get(CurrentEntity-1).addBox(inserter);
+      inserter = null;
     }
   } else if (currentMode == State.deleteMode) {
+    if (remover == null) {
+      remover = new BoundingBox(mouseX, mouseY);
+    } else {
+      players.get(CurrentEntity-1).RemoveAt(remover);
+      remover = null;
+    }
     players.get(CurrentEntity - 1).RemoveAt(mouseX, mouseY);
   }
 }
