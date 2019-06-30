@@ -1,19 +1,25 @@
---------------
-severing crime edge
-Cross Ange
-durarara
-Akuma no riddle
-Black BUtler: Book of Circus
-Kill La Kill
-Problem Children
-Full Metal Alchecmist: Brotherhood
-Kono Suba
-dusk maiden of amnesia
-Soul Eater
-Hellsing Ultiamte
-Guren Laagen
-Keijo
-Aldnoah Zero
-Code Geass
-strike witches
-Food Wars
+Problem Children             12
+Aldnoah Zero                 12
+Akuma no riddle              12
+Food Wars                    24
+durarara                     24
+Kono Suba                    12
+Aldnoah Zero                 12
+Cross Ange                   25
+Guren Laagen                 27
+Problem Children             12
+Black BUtler: Book of Circus 10
+Kill La Kill                 24
+severing crime edge          12
+FMA: Brotherhood             38 
+Kono Suba                    12
+severing crime edge          12
+Soul Eater                   58
+Hellsing Ultiamte            10 (30)
+
+strike witches               12
+
+Black BUtler: Book of Circus 10
+------
+strike witches               12
+Code Geass                   24

@@ -15,7 +15,7 @@ class CollideableEntity {
         if (check == null) throw new IOException();
       } while (!check.contains("Player: {"));
       currentLine = reader.readLine(); //name
-      name = currentLine.substring(currentLine.lastIndexOf(":") + 1);
+      name = trim(currentLine.substring(currentLine.lastIndexOf(":") + 1));
       reader.readLine(); //position
       currentLine = reader.readLine(); //x
       int x = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //x

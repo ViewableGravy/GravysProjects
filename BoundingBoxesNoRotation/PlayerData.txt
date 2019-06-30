@@ -1,8 +1,8 @@
 Player: {
-  Name:        ViewableGravy
+  Name: ViewableGravy
   Position {
     x: 110.0
-    y: -69.0
+    y: -53.0
   }
   Width: 414.0
   Height: 230.0
@@ -11,7 +11,7 @@ Player: {
     box: {
       Position {
         x: 110.0
-        y: -63.0
+        y: -47.0
       },
       Width: 102.0
       Height: 100.0
@@ -19,7 +19,7 @@ Player: {
     box: {
       Position {
         x: 158.0
-        y: 21.0
+        y: 37.0
       },
       Width: 121.0
       Height: 140.0
@@ -27,7 +27,7 @@ Player: {
     box: {
       Position {
         x: 251.0
-        y: 107.0
+        y: 123.0
       },
       Width: 183.0
       Height: 54.0
@@ -35,7 +35,7 @@ Player: {
     box: {
       Position {
         x: 377.0
-        y: 14.0
+        y: 30.0
       },
       Width: 95.0
       Height: 95.0
@@ -43,7 +43,7 @@ Player: {
     box: {
       Position {
         x: 456.0
-        y: 0.0
+        y: 16.0
       },
       Width: 68.0
       Height: 36.0
@@ -51,7 +51,7 @@ Player: {
     box: {
       Position {
         x: 406.0
-        y: -69.0
+        y: -53.0
       },
       Width: 100.0
       Height: 83.0
@@ -59,7 +59,7 @@ Player: {
     box: {
       Position {
         x: 205.0
-        y: -51.0
+        y: -35.0
       },
       Width: 232.0
       Height: 31.0
@@ -67,7 +67,7 @@ Player: {
     box: {
       Position {
         x: 355.0
-        y: -65.0
+        y: -49.0
       },
       Width: 90.0
       Height: 22.0
@@ -75,7 +75,7 @@ Player: {
   ]
 },
 Player: {
-  Name:        Other
+  Name: Other
   Position {
     x: 74.0
     y: 177.0
