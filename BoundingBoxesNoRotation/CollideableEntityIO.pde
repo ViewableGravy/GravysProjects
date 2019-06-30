@@ -25,9 +25,9 @@ static class CEIO {
     if (lastElement)
       output.println(indent.substring(2) + "} Player");
     else 
-      output.println(indent.substring(2) + "} Player,");
+    output.println(indent.substring(2) + "} Player,");
   }
-  
+
   public static CollideableEntity LoadMk3(BufferedReader reader, BoundingBoxesNoRotation sketch) throws IOException {
     CollideableEntity temp = sketch.new CollideableEntity();
     String currentLine = null;
@@ -60,7 +60,7 @@ static class CEIO {
       do {
         currentLine = reader.readLine();//box[]
         if (currentLine.contains("null")) {
-         break; 
+          break;
         }
         reader.readLine();//position
         currentLine = reader.readLine(); //x
@@ -80,6 +80,95 @@ static class CEIO {
     catch (IOException e) {
       throw e;
     }
+    return temp;
+  }
+
+  ///should be run when reader is one line before position
+  // name: myName <-- reader
+  // Position {
+  //   x: ...
+  private static void SetSurroundingBox(BufferedReader reader, CollideableEntity temp) throws IOException {
+    String currentLine;
+    reader.readLine(); //position
+    currentLine = reader.readLine(); //x
+    int x = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //x
+    currentLine = reader.readLine();//y
+    int y = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //y
+    reader.readLine(); //end pos
+    currentLine = reader.readLine(); //h
+    int wid = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //wid
+    currentLine = reader.readLine();//wid
+    int hei = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //hei
+    temp.SetSurroundBox(x, y, wid, hei);//hei
+    println(temp.surroundingBox.GetPos());
+  }
+
+  //
+  private static void ReadBox(BufferedReader reader, CollideableEntity temp, BoundingBoxesNoRotation sketch) throws IOException {
+
+    String currentLine = reader.readLine();//box[]
+    if (currentLine.contains("null")) {
+      return;
+    }
+    reader.readLine();//position
+    currentLine = reader.readLine(); //x
+    int x = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //x
+    currentLine = reader.readLine(); //y
+    int y = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //y
+    reader.readLine(); //}position
+    currentLine = reader.readLine(); //w
+    int wid = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //wid
+    currentLine = reader.readLine(); //h
+    int hei = parseInt(currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "")); //hei
+    temp.boxes.add(sketch.new BoundingBox(x, y, wid, hei));
+  }
+
+  public static CollideableEntity LoadMk3(BufferedReader reader, String name, BoundingBoxesNoRotation sketch) throws IOException {
+    CollideableEntity temp = null;
+    String currentLine = null;
+    try {
+      String check = null;
+      do {
+        check = reader.readLine();
+        if (check == null) throw new IOException();
+      } while (!check.contains("Player: {"));
+      do {
+        if (reader.readLine().contains("3")) { //version {
+          if (reader.readLine().contains(name)) { //name
+            temp = sketch.new CollideableEntity();
+            temp.name = name;
+
+            SetSurroundingBox(reader, temp);
+
+            currentLine = reader.readLine(); //loc
+            temp.location = currentLine.substring(currentLine.lastIndexOf(":") + 1).replaceAll("\\s+", "");
+            temp.sprite = sketch.loadImage(temp.location);
+
+            reader.readLine(); //boxes[]
+            do {
+              ReadBox(reader, temp, sketch);
+            } while (reader.readLine().contains(","));
+            currentLine = reader.readLine(); //]
+          }
+        } else {
+          println("Invalid version number");
+        }
+
+        do
+          currentLine = reader.readLine();
+        while (!currentLine.contains("} Player"));
+        
+        if (!currentLine.contains(","))
+          break;
+          
+        reader.readLine();
+      } while (true);
+    } 
+    catch (IOException e) {
+      throw e;
+    }
+    if (temp == null)
+      throw new IOException();
     return temp;
   }
 }

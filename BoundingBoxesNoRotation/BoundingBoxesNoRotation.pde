@@ -13,7 +13,9 @@ void setup() {
   frameRate(60);
   size(800, 800);
   //LoadMk2("PlayerData.txt");
-  LoadMk2("TestingFile.txt");
+  //LoadMk2("TestingFile.txt");
+  LoadPlayer("TestingFile.txt","Other");
+  LoadPlayer("TestingFile.txt","ViewableGravy");
 }
 
 void draw() {
@@ -178,6 +180,16 @@ void Move() {
       }
     }
   }
+}
+
+void LoadPlayer(String filename, String name) {
+  BufferedReader reader = createReader(filename);
+ try {
+  players.add(CEIO.LoadMk3(reader,name,this) );
+  reader.close();
+ } catch (Exception e) {
+   println(e);
+ }
 }
 
 void LoadMk2(String filename) {
