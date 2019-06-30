@@ -134,7 +134,9 @@ static class CEIO {
       } while (!check.contains("Player: {"));
       do {
         if (reader.readLine().contains("3")) { //version {
-          if (reader.readLine().contains(name)) { //name
+          currentLine = reader.readLine();
+          currentLine = trim(currentLine.substring(currentLine.lastIndexOf(":") + 1));
+          if (currentLine.equalsIgnoreCase(name)) { //name
             temp = sketch.new CollideableEntity();
             temp.name = name;
 

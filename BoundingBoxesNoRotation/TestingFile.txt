@@ -77,7 +77,7 @@ Player: {
 } Player,
 Player: {
   Version: 3
-  Name: Other
+  Name: ViewableGravy2
   Position {
     x: 74.0
     y: 177.0

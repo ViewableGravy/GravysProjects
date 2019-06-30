@@ -14,7 +14,7 @@ void setup() {
   size(800, 800);
   //LoadMk2("PlayerData.txt");
   //LoadMk2("TestingFile.txt");
-  LoadPlayer("TestingFile.txt","Other");
+  LoadPlayer("TestingFile.txt","view");
   LoadPlayer("TestingFile.txt","ViewableGravy");
 }
 
@@ -188,7 +188,7 @@ void LoadPlayer(String filename, String name) {
   players.add(CEIO.LoadMk3(reader,name,this) );
   reader.close();
  } catch (Exception e) {
-   println(e);
+   println("Entity with name \"" + name + "\" Was not found");
  }
 }
 
