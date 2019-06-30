@@ -1,71 +1,69 @@
 public class BoundingBox {
-  PVector pos;
-  float wid,hei;
+  //PVector pos;
+  //float wid,hei;
+  
+  Rectangle rectangle;
   boolean processing = false;
   
   public PVector GetPos() {
-   return pos; 
+   return rectangle.pos; 
   }
   
   public PVector GetWidHei() {
-   return new PVector(wid,hei); 
+   return new PVector(rectangle.wid,rectangle.hei); 
   }
   
   
   
   BoundingBox(int x, int y, int wid, int hei) {
-    this.pos = new PVector(x,y);
-    this.wid = wid;
-    this.hei = hei;
+    rectangle = new Rectangle(new PVector(x,y),wid,hei);
+   // this.pos = new PVector(x,y);
+    //this.wid = wid;
+    //this.hei = hei;
   }
   
   BoundingBox(int x, int y) {
     processing = true;
-    this.pos = new PVector(x,y);
+    this.rectangle.pos = new PVector(x,y);
   }
   
   public void UpdateParameters(int x, int y) {
     if (processing) {
-      this.wid = x - this.pos.x;
-      this.hei = y - this.pos.y;
+      this.rectangle.wid = x - this.rectangle.pos.x;
+      this.rectangle.hei = y - this.rectangle.pos.y;
     }
   }
-  
+   //<>//
   public void Confirm() {
     
-    if (wid < 0) { //<>//
-     pos.x += wid;
-     wid = abs(wid);
+    if (rectangle.wid < 0) {
+     rectangle.pos.x += rectangle.wid;
+     rectangle.wid = abs(rectangle.wid);
     }
     
-    if (hei < 0) {
-     pos.y += hei;
-     hei = abs(hei);
+    if (rectangle.hei < 0) {
+     rectangle.pos.y += rectangle.hei;
+     rectangle.hei = abs(rectangle.hei);
     }
     
     processing = false;
   }
   
   public boolean Collide(BoundingBox other) {
-   return  pos.x < other.pos.x + other.wid && 
-           pos.x + wid > other.pos.x && 
-           pos.y < other.pos.y + other.hei &&
-           pos.y + hei > other.pos.y;
+    return Colliders.Collide(other.rectangle, this.rectangle);
   }
   
   public boolean Collide(float x, float y) {
-    return x > pos.x && 
-           x < pos.x + wid &&
-           y > pos.y && 
-           y < pos.y + hei;
+    return Colliders.Collide(new PVector(x,y), this.rectangle);
   }
+  
   public void Display() {
-   rect(pos.x,pos.y,wid,hei); 
+   rect(rectangle.pos.x,rectangle.pos.y,rectangle.wid,rectangle.hei); 
   }
   
   public void translate(int x, int y) {
-    this.pos.x += x;
-    this.pos.y += y;
+    this.rectangle.pos.x += x;
+    this.rectangle.pos.y += y;
   }
   
   //pass in the current indentation, rather than the desired indentationn
@@ -73,11 +71,11 @@ public class BoundingBox {
     output.println(indentation + "box: {");
     indentation += "  ";
     output.println(indentation + "Position {");
-    output.println(indentation + "  x: " + pos.x);
-    output.println(indentation + "  y: " + pos.y);
+    output.println(indentation + "  x: " + rectangle.pos.x);
+    output.println(indentation + "  y: " + rectangle.pos.y);
     output.println(indentation + "},");
-    output.println(indentation +"Width: " + wid);
-    output.println(indentation +"Height: " + hei);
+    output.println(indentation +"Width: " + rectangle.wid);
+    output.println(indentation +"Height: " + rectangle.hei);
     if (lastElement)
         output.println(indentation.substring(2) + "}");
       else

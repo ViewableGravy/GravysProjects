@@ -81,11 +81,11 @@ class CollideableEntity {
     indent += "  ";
     output.println(indent + "Name: " + name);
     output.println(indent + "Position {");
-    output.println(indent + "  " + "x: " + surroundingBox.pos.x);
-    output.println(indent + "  " + "y: " + surroundingBox.pos.y);
+    output.println(indent + "  " + "x: " + surroundingBox.rectangle.pos.x);
+    output.println(indent + "  " + "y: " + surroundingBox.rectangle.pos.y);
     output.println(indent + "}");
-    output.println(indent + "Width: " + surroundingBox.wid);
-    output.println(indent + "Height: " + surroundingBox.hei);
+    output.println(indent + "Width: " + surroundingBox.rectangle.wid);
+    output.println(indent + "Height: " + surroundingBox.rectangle.hei);
     output.println(indent + "Location: " + location);
     output.println(indent + "boxes: ["); //this is an array of boxes
 
@@ -157,7 +157,7 @@ class CollideableEntity {
     for (BoundingBox box : boxes) {
       box.Display();
     }
-    image(sprite, surroundingBox.pos.x, surroundingBox.pos.y);
+    image(sprite, surroundingBox.rectangle.pos.x, surroundingBox.rectangle.pos.y);
   }
 
   public void RemoveAt(float x, float y) {

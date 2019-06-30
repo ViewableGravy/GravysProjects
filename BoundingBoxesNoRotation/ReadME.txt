@@ -4,6 +4,7 @@ Developer:
 
 Description:
   an application that allows multiple entities to be created with multiple hitboxes, saved and loaded from a file.
+  entities also contain an sprite (image) that's link is stored in file for loading.
 
 There are currently several different application states:
   gameMode:
@@ -23,21 +24,28 @@ Controls:
         'r' : enters deleteMode
 	'g' : enters gameMode
   deleteMode: 
-	left click : delete hitbox (of current entity) at mouse position (will remove bottom most hitbox)
+	left click : initiate new hitbox deletion for current entity
+	left click (confirm) : confirm area of deletion on current entity
   insertMode:
         left click : initiate new hitbox creation for current entity
         left click (confirm) : confirm hitbox creation on current entity
 	
-
-note: each entity has an array of hitboxes but also stores information for an overall bounding box to use in simple collision.
-e.g. quadtree
-
-information for all entities is stored in the textfile "PlayerData.txt" and consequently read from also.
-
-future implementations:
-	entities have sprites (images)
-		overall hitbox should cover the image area
-	Scale entity + hitboxes to allow the same entity to be created in a different size
-	Separated into separate program:
-		Store entities within a quadTree using largest rectangle as quad dictator
-		collision entirely on quadtree
+file storage structure:
+  information for all entities is stored in the textfile "PlayerData.txt" and consequently read from also. Data is stored
+  in a custom, JSON-like style with white space for readability
+Implemented:
+  control any player
+  delete multiple hitboxes
+ToImplement:
+  create new player (GUI)
+  Load specific player
+  only create hitboxes within surrounding hitbox
+  Confirm hitbox creation
+  surrounding hitbox is image size ++ buffer
+  resizing
+  quadtree storing + collision
+FixedIssues:
+  moving crashes with no second entity
+  collision only works when there are two entities
+KnownIssues:
+  no known issues at the moment
