@@ -12,8 +12,8 @@ void setup() {
   stroke(255);
   frameRate(60);
   size(800, 800);
-  LoadMk2("PlayerData.txt");
-  //LoadMk2("TestingFile.txt");
+  //LoadMk2("PlayerData.txt");
+  LoadMk2("TestingFile.txt");
 }
 
 void draw() {
@@ -184,7 +184,7 @@ void LoadMk2(String filename) {
   BufferedReader reader = createReader(filename);
   while (true) {
     try {
-      players.add(new CollideableEntity(reader));
+      players.add(CEIO.LoadMk3(reader,this));
     } 
     catch (IOException e) { 
       break;
@@ -194,13 +194,15 @@ void LoadMk2(String filename) {
     reader.close();
   } 
   catch (IOException e) {
+    e.printStackTrace();
   };
 }
 
 void Save() {
-  PrintWriter output = createWriter("PlayerData.txt");
+  //PrintWriter output = createWriter("PlayerData.txt");
+  PrintWriter output = createWriter("TestingFile.txt");
   for (int j = 0; j < players.size(); j++) {
-    players.get(j).SaveMk2(output, "", j == players.size() - 1); // "" for no indentation
+    CEIO.SaveMk3(output, "", j == players.size() - 1, players.get(j));
   }
   output.close(); // Finishes the file
 }

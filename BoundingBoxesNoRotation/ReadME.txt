@@ -36,7 +36,11 @@ file storage structure:
 Implemented:
   control any player
   delete multiple hitboxes
-ToImplement:
+To Implement:
+  Add version field to dictate which version is currently being used (loading and saving to file)
+  Modify storage structure (Mk3)
+    at the end of an object it should look like: "} Player,". This way it should be easier to read where an object begins and ends 
+    for easier searching
   create new player (GUI)
   Load specific player
   only create hitboxes within surrounding hitbox

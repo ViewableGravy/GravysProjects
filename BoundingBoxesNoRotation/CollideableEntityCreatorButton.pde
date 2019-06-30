@@ -1,3 +1,5 @@
+//this is a button for creating an Entity. The constructor creates a rectangle and collide will take the mouse position
+// to determine if it is being clicked.
 public class EntityCreator {
   Rectangle rectangle;
  
