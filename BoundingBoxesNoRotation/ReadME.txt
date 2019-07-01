@@ -51,6 +51,6 @@ To Implement:
 FixedIssues:
   moving crashes with no second entity
   collision only works when there are two entities
-KnownIssues:
   cannot add hitboxes to entities
+KnownIssues:
   no known issues at the moment
