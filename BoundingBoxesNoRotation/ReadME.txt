@@ -52,4 +52,5 @@ FixedIssues:
   moving crashes with no second entity
   collision only works when there are two entities
 KnownIssues:
+  cannot add hitboxes to entities
   no known issues at the moment

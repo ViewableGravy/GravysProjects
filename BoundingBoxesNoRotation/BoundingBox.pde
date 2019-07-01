@@ -24,7 +24,8 @@ public class BoundingBox {
   
   BoundingBox(int x, int y) {
     processing = true;
-    this.rectangle.pos = new PVector(x,y);
+    this.rectangle = new Rectangle(new PVector(x,y),0,0);
+    //this.rectangle.pos = new PVector(x,y);
   }
   
   public void UpdateParameters(int x, int y) {

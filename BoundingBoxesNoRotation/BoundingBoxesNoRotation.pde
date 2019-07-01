@@ -13,9 +13,9 @@ void setup() {
   frameRate(60);
   size(800, 800);
   //LoadMk2("PlayerData.txt");
-  //LoadMk2("TestingFile.txt");
-  LoadPlayer("TestingFile.txt","view");
-  LoadPlayer("TestingFile.txt","ViewableGravy");
+  LoadMk2("TestingFile.txt");
+  //LoadPlayer("TestingFile.txt","view");
+  //LoadPlayer("TestingFile.txt","ViewableGravy");
 }
 
 void draw() {
