@@ -24,6 +24,74 @@ class CollideableEntity {
     UpdateSurroundingBox();
   }
 
+  public Boolean newHitboxNull() {
+    return newHitbox == null;
+  }
+
+  public void DisplayAddingHitbox() throws Exception {
+    newHitbox.Display();
+  }
+
+  private BoundingBox newHitbox = null;
+  public void AddHitbox(boolean continueUpdating, float mousex, float mousey) {
+    if (newHitbox == null) {
+      if (Colliders.Collide(new PVector(mousex, mousey), surroundingBox.rectangle)) {
+        newHitbox = new BoundingBox((int)mousex, (int)mousey);
+      } else {
+        //do nothing since you cannot create a hitbox at the current location
+      }
+    } else {
+      if (continueUpdating) {
+        if (Colliders.Collide(new PVector(mousex, mousey), surroundingBox.rectangle)) {
+          newHitbox.UpdateParameters((int)mousex, (int)mousey);
+        } else {
+          int left = (int)surroundingBox.rectangle.pos.x;
+          int right = (int)(surroundingBox.rectangle.pos.x + surroundingBox.rectangle.wid);
+          int up = (int)surroundingBox.rectangle.pos.y;
+          int down = (int)(surroundingBox.rectangle.pos.y + surroundingBox.rectangle.hei);
+
+          if (mousex > right) {
+            if (mousey > down) {
+              newHitbox.UpdateParameters(right, down);
+            } else if (mousey < up) {
+              newHitbox.UpdateParameters(right, up) ;
+            } else {
+              newHitbox.UpdateParameters(right, (int)mousey);
+            }
+          } else if (mousex < left) {
+            if (mousey > down) {
+              newHitbox.UpdateParameters(left, down);
+            } else if (mousey < up) {
+              newHitbox.UpdateParameters(left, up) ;
+            } else {
+              newHitbox.UpdateParameters(left, (int)mousey) ;
+            }
+          } 
+          if (mousey > down) {
+            if (mousex > right) {
+              newHitbox.UpdateParameters(right, down);
+            } else if (mousex < left) {
+              newHitbox.UpdateParameters(left, down) ;
+            } else {
+              newHitbox.UpdateParameters((int)mousex, down);
+            }
+          } else if (mousey < up) {
+            if (mousex > right) {
+              newHitbox.UpdateParameters(right, up);
+            } else if (mousex < left) {
+              newHitbox.UpdateParameters(left, up) ;
+            } else {
+              newHitbox.UpdateParameters((int)mousex, up) ;
+            }
+          }
+        }
+      } else {
+        boxes.add(newHitbox);
+        newHitbox = null;
+      }
+    }
+  }
+
   private void SetSurroundBox(int x, int y, int wid, int hei) {
     surroundingBox = new BoundingBox(x, y, wid, hei);
   }
@@ -72,9 +140,9 @@ class CollideableEntity {
   }
 
   public void Display() {
-    fill(255,0,0);
+    fill(255, 0, 0);
     surroundingBox.Display();
-    fill(0,0,255);
+    fill(0, 0, 255);
     for (BoundingBox box : boxes) {
       box.Display();
     }
@@ -90,10 +158,10 @@ class CollideableEntity {
       }
     }
   }
-  
+
   public void RemoveAt(BoundingBox remover) {
     remover.Confirm();
-    for(int i = boxes.size() - 1; i >= 0; i--) {
+    for (int i = boxes.size() - 1; i >= 0; i--) {
       if (remover.Collide(boxes.get(i))) {
         boxes.remove(i);
       }

@@ -13,19 +13,13 @@ public class BoundingBox {
    return new PVector(rectangle.wid,rectangle.hei); 
   }
   
-  
-  
   BoundingBox(int x, int y, int wid, int hei) {
     rectangle = new Rectangle(new PVector(x,y),wid,hei);
-   // this.pos = new PVector(x,y);
-    //this.wid = wid;
-    //this.hei = hei;
   }
   
   BoundingBox(int x, int y) {
     processing = true;
     this.rectangle = new Rectangle(new PVector(x,y),0,0);
-    //this.rectangle.pos = new PVector(x,y);
   }
   
   public void UpdateParameters(int x, int y) {

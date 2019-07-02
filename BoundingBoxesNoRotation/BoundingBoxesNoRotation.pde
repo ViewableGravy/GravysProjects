@@ -29,13 +29,19 @@ void draw() {
   switch(currentMode) {
   case insertMode:
     //Add hitbox
-    if (inserter != null) {
-      inserter.UpdateParameters(mouseX, mouseY); 
-      inserter.Display();
+    CollideableEntity current = players.get(CurrentEntity-1);
+    if (!current.newHitboxNull()) {
+      current.AddHitbox(true, mouseX, mouseY);
+      try {
+        current.DisplayAddingHitbox();
+      } 
+      catch (Exception e) {
+        println("hitbox does not exist yet");
+      }
     }
     break;
   case deleteMode:
-   if (remover != null) {
+    if (remover != null) {
       remover.UpdateParameters(mouseX, mouseY); 
       remover.Display();
     }
@@ -53,17 +59,11 @@ void draw() {
   text(currentMode.toString(), 10, 60);
 }
 
-BoundingBox inserter = null;
 BoundingBox remover = null;
 void mouseClicked() {
   //if insert mode, deal with hitbox creation
   if (currentMode == State.insertMode) {
-    if (inserter == null) {
-      inserter = new BoundingBox(mouseX, mouseY);
-    } else {
-      players.get(CurrentEntity-1).addBox(inserter);
-      inserter = null;
-    }
+    players.get(CurrentEntity-1).AddHitbox(false,mouseX,mouseY);
   } else if (currentMode == State.deleteMode) {
     if (remover == null) {
       remover = new BoundingBox(mouseX, mouseY);
@@ -184,19 +184,20 @@ void Move() {
 
 void LoadPlayer(String filename, String name) {
   BufferedReader reader = createReader(filename);
- try {
-  players.add(CEIO.LoadMk3(reader,name,this) );
-  reader.close();
- } catch (Exception e) {
-   println("Entity with name \"" + name + "\" Was not found");
- }
+  try {
+    players.add(CEIO.LoadMk3(reader, name, this) );
+    reader.close();
+  } 
+  catch (Exception e) {
+    println("Entity with name \"" + name + "\" Was not found");
+  }
 }
 
 void LoadMk2(String filename) {
   BufferedReader reader = createReader(filename);
   while (true) {
     try {
-      players.add(CEIO.LoadMk3(reader,this));
+      players.add(CEIO.LoadMk3(reader, this));
     } 
     catch (IOException e) { 
       break;
