@@ -2,8 +2,8 @@ Player: {
   Version: 3
   Name: ViewableGravy
   Position {
-    x: 233.0
-    y: -53.0
+    x: 214.0
+    y: 438.0
   }
   Width: 414.0
   Height: 230.0
@@ -11,64 +11,64 @@ Player: {
   boxes: [
     box: {
       Position {
-        x: 233.0
-        y: -47.0
+        x: 214.0
+        y: 444.0
       },
       Width: 102.0
       Height: 100.0
     },
     box: {
       Position {
-        x: 281.0
-        y: 37.0
+        x: 262.0
+        y: 528.0
       },
       Width: 121.0
       Height: 140.0
     },
     box: {
       Position {
-        x: 374.0
-        y: 123.0
+        x: 355.0
+        y: 614.0
       },
       Width: 183.0
       Height: 54.0
     },
     box: {
       Position {
-        x: 500.0
-        y: 30.0
+        x: 481.0
+        y: 521.0
       },
       Width: 95.0
       Height: 95.0
     },
     box: {
       Position {
-        x: 579.0
-        y: 16.0
+        x: 560.0
+        y: 507.0
       },
       Width: 68.0
       Height: 36.0
     },
     box: {
       Position {
-        x: 529.0
-        y: -53.0
+        x: 510.0
+        y: 438.0
       },
       Width: 100.0
       Height: 83.0
     },
     box: {
       Position {
-        x: 328.0
-        y: -35.0
+        x: 309.0
+        y: 456.0
       },
       Width: 232.0
       Height: 31.0
     },
     box: {
       Position {
-        x: 478.0
-        y: -49.0
+        x: 459.0
+        y: 442.0
       },
       Width: 90.0
       Height: 22.0
@@ -79,8 +79,8 @@ Player: {
   Version: 3
   Name: ViewableGravy2
   Position {
-    x: 74.0
-    y: 177.0
+    x: 211.0
+    y: 161.0
   }
   Width: 409.0
   Height: 229.0
@@ -88,72 +88,72 @@ Player: {
   boxes: [
     box: {
       Position {
-        x: 77.0
-        y: 181.0
+        x: 214.0
+        y: 165.0
       },
       Width: 108.0
       Height: 54.0
     },
     box: {
       Position {
-        x: 74.0
-        y: 241.0
+        x: 211.0
+        y: 225.0
       },
       Width: 82.0
       Height: 41.0
     },
     box: {
       Position {
-        x: 123.0
-        y: 272.0
+        x: 260.0
+        y: 256.0
       },
       Width: 67.0
       Height: 77.0
     },
     box: {
       Position {
-        x: 176.0
-        y: 344.0
+        x: 313.0
+        y: 328.0
       },
       Width: 216.0
       Height: 62.0
     },
     box: {
       Position {
-        x: 176.0
-        y: 189.0
+        x: 313.0
+        y: 173.0
       },
       Width: 218.0
       Height: 34.0
     },
     box: {
       Position {
-        x: 379.0
-        y: 177.0
+        x: 516.0
+        y: 161.0
       },
       Width: 79.0
       Height: 82.0
     },
     box: {
       Position {
-        x: 451.0
-        y: 235.0
+        x: 588.0
+        y: 219.0
       },
       Width: 32.0
       Height: 44.0
     },
     box: {
       Position {
-        x: 406.0
-        y: 274.0
+        x: 543.0
+        y: 258.0
       },
       Width: 50.0
       Height: 13.0
     },
     box: {
       Position {
-        x: 385.0
-        y: 271.0
+        x: 522.0
+        y: 255.0
       },
       Width: 47.0
       Height: 77.0

@@ -140,7 +140,10 @@ class CollideableEntity {
   }
 
   public void Display() {
-    fill(255, 0, 0);
+    //fill(255, 0, 0);
+    noFill();
+    strokeWeight(0.2);
+    stroke(255);
     surroundingBox.Display();
     fill(0, 0, 255);
     for (BoundingBox box : boxes) {
@@ -153,7 +156,6 @@ class CollideableEntity {
     for (BoundingBox box : boxes) {
       if ( box.Collide(x, y)) {
         boxes.remove(box);
-        //UpdateSurroundingBox();
         break; // only remove one box at a time (search top down to remove top)
       }
     }
