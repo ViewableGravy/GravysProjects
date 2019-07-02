@@ -47,11 +47,12 @@ void draw() {
     }
     break;
   case gameMode: 
+    //movement
+    Move();
     break;
   }
 
-  //movement
-  Move();
+
 
   textSize(20);
   stroke(0, 255, 0);
@@ -63,7 +64,7 @@ BoundingBox remover = null;
 void mouseClicked() {
   //if insert mode, deal with hitbox creation
   if (currentMode == State.insertMode) {
-    players.get(CurrentEntity-1).AddHitbox(false,mouseX,mouseY);
+    players.get(CurrentEntity-1).AddHitbox(false, mouseX, mouseY);
   } else if (currentMode == State.deleteMode) {
     if (remover == null) {
       remover = new BoundingBox(mouseX, mouseY);
