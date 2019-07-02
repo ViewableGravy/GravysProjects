@@ -8,7 +8,7 @@ Description:
 
 There are currently several different application states:
   gameMode:
-    No current functionality
+    for moving around the screen space.
   deleteMode:
     for deleting hitboxes from an entity.
   insertMode:
@@ -36,16 +36,16 @@ file storage structure:
 Implemented:
   control any player
   delete multiple hitboxes
-To Implement:
   Add version field to dictate which version is currently being used (loading and saving to file)
   Modify storage structure (Mk3)
     at the end of an object it should look like: "} Player,". This way it should be easier to read where an object begins and ends 
     for easier searching
-  create new player (GUI)
   Load specific player
   only create hitboxes within surrounding hitbox
+To Implement:
+  create new player (GUI)
   Confirm hitbox creation
-  surrounding hitbox is image size ++ buffer
+  surrounding hitbox is image size ++ buffer (currently hardcoded)
   resizing
   quadtree storing + collision
 FixedIssues:
