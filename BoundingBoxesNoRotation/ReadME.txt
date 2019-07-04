@@ -38,11 +38,14 @@ Implemented:
   delete multiple hitboxes
   Add version field to dictate which version is currently being used (loading and saving to file)
   Modify storage structure (Mk3)
-    at the end of an object it should look like: "} Player,". This way it should be easier to read where an object begins and ends 
-    for easier searching
+  	at the end of an object it should look like: "} Player,". This way it should be easier to read where an object begins and ends 
+        for easier searching
   Load specific player
   only create hitboxes within surrounding hitbox
 To Implement:
+  Player Class that inherits from entity
+  	it makes sense that an entity would have a type (String dictating what it actually is)
+  	such as "Table" or "Player" and then the player class stores it's username in a new field
   create new player (GUI)
   Confirm hitbox creation
   surrounding hitbox is image size ++ buffer (currently hardcoded)
@@ -54,3 +57,11 @@ FixedIssues:
   cannot add hitboxes to entities
 KnownIssues:
   no known issues at the moment
+
+
+
+
+Future program notes:
+  recently i had an idea to create essentially this program except instead of storing hitboxes i can draw the surrounding shape, which
+is then split up into triangles that utilise off axis theory to calculate collision, this would give much tighter hitboxes at a cost of
+potentially many more hitboxes (causing lag).
