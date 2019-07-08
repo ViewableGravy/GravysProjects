@@ -65,3 +65,4 @@ Future program notes:
   recently i had an idea to create essentially this program except instead of storing hitboxes i can draw the surrounding shape, which
 is then split up into triangles that utilise off axis theory to calculate collision, this would give much tighter hitboxes at a cost of
 potentially many more hitboxes (causing lag).
+  research ear-clipping-triangulation topic to learn
